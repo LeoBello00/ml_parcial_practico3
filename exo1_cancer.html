@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
@@ -615,6 +615,7 @@ SVC (sigmoid)       1.0     0.982      0.982   0.991     0.986 0.979
 </div>
 </div>
 </div>
+<p>the best model is SVC with rbf kernel because is almost fast as sigmoid but its AUC is the best (with the poly one, but much faster), and has a recall of 1 that is the most important metric in this case</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -660,6 +661,7 @@ SVC (sigmoid)       1.0     0.982      0.982   0.991     0.986 0.979
 <img alt="_images/ca9226d5df0672a3dfe8ada1b094973e34f657e3f2cb4143b1355e5db97a4884.png" src="_images/ca9226d5df0672a3dfe8ada1b094973e34f657e3f2cb4143b1355e5db97a4884.png" />
 </div>
 </div>
+<p>very similar AUC-ROC curves because, how we can see, the difference in AUC between the models is less than 0.1</p>
 </section>
 </section>
 
