@@ -3,6 +3,12 @@
 
 format: jb-book
 root: intro
-chapters:
-- file: exo1_cancer.ipynb
-- file: exo1_housing.ipynb
+parts:
+- caption: Exercice 1
+  chapters:
+  - file: exo1_cancer.ipynb
+  - file: exo1_housing.ipynb
+- caption: Exercice 2
+  chapters:
+  - file: exo2_fraud_eda.ipynb
+  - file: exo2_wind_eda.ipynb
