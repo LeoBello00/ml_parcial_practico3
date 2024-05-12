@@ -6,8 +6,8 @@ root: intro
 parts:
   - caption: Exercice 1
     chapters:
-      - file: exo1_cancer
-      - file: exo1_housing
+      - file: exo1_cancer.ipynb
+      - file: exo1_housing.ipynb
   - caption: Exercice 2
     chapters:
-      - file: exo2_fraud_eda
+      - file: exo2_fraud_eda.ipynb
