@@ -6,4 +6,5 @@ root: intro
 chapters:
 - file: exo1_cancer
 - file: exo1_housing
-- file: exo2_fraud_eda
+- file: exo2_fraud
+- file: exo2_wind
