@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Boston Housing &#8212; My sample book</title>
+    <title>Exercise 1: Boston Housing &#8212; My sample book</title>
   
   
   
@@ -61,7 +61,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Exercise 2: Fraud detection" href="exo2_fraud_eda.html" />
-    <link rel="prev" title="Breast cancer" href="exo1_cancer.html" />
+    <link rel="prev" title="Exercise 1: Breast cancer" href="exo1_cancer.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -360,7 +360,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Boston Housing</h1>
+    <h1>Exercise 1: Boston Housing</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -385,25 +385,14 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="boston-housing">
-<h1>Boston Housing<a class="headerlink" href="#boston-housing" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="exercise-1-boston-housing">
+<h1>Exercise 1: Boston Housing<a class="headerlink" href="#exercise-1-boston-housing" title="Link to this heading">#</a></h1>
 <section id="load-data">
 <h2>Load data<a class="headerlink" href="#load-data" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mglearn</span>
 <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">mglearn</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">load_extended_boston</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">mglearn</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">mglearn</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">load_extended_boston</span><span class="p">()</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;mglearn&#39;
 </pre></div>
 </div>
 </div>
@@ -559,25 +548,25 @@ Fitting 5 folds for each of 686 candidates, totalling 3430 fits
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best params SVR (poly): 
 {&#39;model__C&#39;: 100, &#39;model__epsilon&#39;: 1, &#39;model__gamma&#39;: 0.1, &#39;scaler&#39;: MinMaxScaler()}
-CPU Time: 304.3s
+CPU Time: 278.1s
 
 Training SVR (linear)...
 Fitting 5 folds for each of 1029 candidates, totalling 5145 fits
 Best params SVR (linear): 
 {&#39;model__C&#39;: 100, &#39;model__epsilon&#39;: 1, &#39;model__gamma&#39;: 0.001, &#39;scaler&#39;: None}
-CPU Time: 783.2s
+CPU Time: 704.7s
 
 Training SVR (rbf)...
 Fitting 5 folds for each of 1029 candidates, totalling 5145 fits
 Best params SVR (rbf): 
 {&#39;model__C&#39;: 1000, &#39;model__epsilon&#39;: 1, &#39;model__gamma&#39;: 0.1, &#39;scaler&#39;: MinMaxScaler()}
-CPU Time: 3.4s
+CPU Time: 3.3s
 
 Training SVR (sigmoid)...
 Fitting 5 folds for each of 1029 candidates, totalling 5145 fits
 Best params SVR (sigmoid): 
 {&#39;model__C&#39;: 1000, &#39;model__epsilon&#39;: 0.1, &#39;model__gamma&#39;: 0.01, &#39;scaler&#39;: None}
-CPU Time: 2.9s
+CPU Time: 2.4s
 </pre></div>
 </div>
 </div>
@@ -593,10 +582,10 @@ CPU Time: 2.9s
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        Model  CPU time  MAPE  RMSE    R2
-   SVR (poly)     304.3 0.109 3.200 0.863
- SVR (linear)     783.2 0.116 3.507 0.835
-    SVR (rbf)       3.4 0.117 3.121 0.869
-SVR (sigmoid)       2.9 0.129 3.891 0.797
+   SVR (poly)     278.1 0.109 3.200 0.863
+ SVR (linear)     704.7 0.116 3.507 0.835
+    SVR (rbf)       3.3 0.117 3.121 0.869
+SVR (sigmoid)       2.4 0.129 3.891 0.797
 </pre></div>
 </div>
 </div>
@@ -665,7 +654,7 @@ SVR (sigmoid)       2.9 0.129 3.891 0.797
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Breast cancer</p>
+        <p class="prev-next-title">Exercise 1: Breast cancer</p>
       </div>
     </a>
     <a class="right-next"

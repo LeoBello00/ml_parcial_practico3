@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Breast cancer &#8212; My sample book</title>
+    <title>Exercise 1: Breast cancer &#8212; My sample book</title>
   
   
   
@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'exo1_cancer';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Boston Housing" href="exo1_housing.html" />
+    <link rel="next" title="Exercise 1: Boston Housing" href="exo1_housing.html" />
     <link rel="prev" title="Parcial practico 3" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -360,7 +360,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Breast cancer</h1>
+    <h1>Exercise 1: Breast cancer</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -385,8 +385,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="breast-cancer">
-<h1>Breast cancer<a class="headerlink" href="#breast-cancer" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="exercise-1-breast-cancer">
+<h1>Exercise 1: Breast cancer<a class="headerlink" href="#exercise-1-breast-cancer" title="Link to this heading">#</a></h1>
 <p>In cancer detection, we want to minimize incorrect negative predictions (i.e. the sick patient is classified as negative) because this diagnosis could lead to serious health problems. Therefore, the most important metric in the application of cancer detection is the recall which objective is to limit the number of false negatives.</p>
 <section id="load-data">
 <h2>Load data<a class="headerlink" href="#load-data" title="Link to this heading">#</a></h2>
@@ -426,18 +426,6 @@ document.write(`
 <span class="n">df_cancer</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cancer</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span>
 
 <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">df_cancer</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">df_cancer</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">],</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1941688/1489833405.py:1: DeprecationWarning: 
-Pyarrow will become a required dependency of pandas in the next major release of pandas (pandas 3.0),
-(to allow more performant data types, such as the Arrow string type, and better interoperability with other libraries)
-but was not found to be installed on your system.
-If this would cause problems for you,
-please provide us feedback at https://github.com/pandas-dev/pandas/issues/54466
-        
-  import pandas as pd
 </pre></div>
 </div>
 </div>
@@ -572,23 +560,29 @@ please provide us feedback at https://github.com/pandas-dev/pandas/issues/54466
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">model_evaluation_clf</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">warnings</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training SVC (poly)...
+Fitting 5 folds for each of 162 candidates, totalling 810 fits
+Best params SVC (poly): 
+{&#39;model__C&#39;: 0.0001, &#39;model__gamma&#39;: 10, &#39;scaler&#39;: MinMaxScaler()}
+CPU Time: 1.6s
 
-<span class="n">File</span> <span class="o">~/</span><span class="n">Documents</span><span class="o">/</span><span class="n">ML</span><span class="o">/</span><span class="n">ml_partial3</span><span class="o">/</span><span class="n">docs</span><span class="o">/</span><span class="n">utils</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">4</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">statsmodels.stats.outliers_influence</span> <span class="kn">import</span> <span class="n">variance_inflation_factor</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">itertools</span>
+Training SVC (linear)...
+Fitting 5 folds for each of 243 candidates, totalling 1215 fits
+Best params SVC (linear): 
+{&#39;model__C&#39;: 100, &#39;model__gamma&#39;: 0.0001, &#39;scaler&#39;: MinMaxScaler()}
+CPU Time: 85.9s
 
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;statsmodels&#39;
+Training SVC (rbf)...
+Fitting 5 folds for each of 243 candidates, totalling 1215 fits
+Best params SVC (rbf): 
+{&#39;model__C&#39;: 10, &#39;model__gamma&#39;: 0.1, &#39;scaler&#39;: MinMaxScaler()}
+CPU Time: 1.0s
+
+Training SVC (sigmoid)...
+Fitting 5 folds for each of 243 candidates, totalling 1215 fits
+Best params SVC (sigmoid): 
+{&#39;model__C&#39;: 1000, &#39;model__gamma&#39;: 0.01, &#39;scaler&#39;: MinMaxScaler()}
+CPU Time: 0.8s
 </pre></div>
 </div>
 </div>
@@ -604,8 +598,8 @@ please provide us feedback at https://github.com/pandas-dev/pandas/issues/54466
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        Model  CPU time  Accuracy  Precision  Recall  f1-score   AUC
-   SVC (poly)       1.5     0.988      0.982   1.000     0.991 0.984
- SVC (linear)      91.6     0.977      0.981   0.981     0.981 0.975
+   SVC (poly)       1.6     0.988      0.982   1.000     0.991 0.984
+ SVC (linear)      85.9     0.977      0.981   0.981     0.981 0.975
     SVC (rbf)       1.0     0.988      0.982   1.000     0.991 0.984
 SVC (sigmoid)       0.8     0.982      0.982   0.991     0.986 0.979
 </pre></div>
@@ -705,7 +699,7 @@ SVC (sigmoid)       0.8     0.982      0.982   0.991     0.986 0.979
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Boston Housing</p>
+        <p class="prev-next-title">Exercise 1: Boston Housing</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
