@@ -11,4 +11,3 @@ parts:
 - caption: Exercice 2
   chapters:
   - file: exo2_fraud_eda.ipynb
-  - file: exo2_wind_eda.ipynb
