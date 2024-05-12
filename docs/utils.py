@@ -70,3 +70,13 @@ def delete_multicollinearity(df, target_name, VIF_threshold):
             end = time()
             n_VIF = VIF_mat["VIF"][0]
     return X
+
+def print_percentage_missing_values(df):
+    nb_missing_values = df.isnull().sum().sum()
+    percentage_missing_values = round(100*nb_missing_values / (df.shape[0] * df.shape[1]), 1)
+    print(f'Missing values: {nb_missing_values} ({percentage_missing_values}%)')
+
+def percentage_missing_values(df):
+    nb_missing_values = df.isnull().sum().sum()
+    percentage_missing_values = round(100*nb_missing_values / (df.shape[0] * df.shape[1]), 1)
+    return percentage_missing_values

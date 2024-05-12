@@ -2,13 +2,12 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-# root: intro
 root: intro
 parts:
   - caption: Exercice 1
     chapters:
-      - file: src/exo1_cancer.ipynb
-      - file: src/exo1_housing.ipynb
+      - file: exo1_cancer.ipynb
+      - file: exo1_housing.ipynb
   - caption: Exercice 2
     chapters:
-      - file: src/exo2_fraud_eda.ipynb
+      - file: exo2_fraud_eda.ipynb
