@@ -53,18 +53,10 @@
     <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'exo1_housing';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -446,9 +438,9 @@ document.write(`
 <span class="n">dict_models</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span>
         <span class="s1">&#39;name_clf&#39;</span> <span class="p">:</span> <span class="s1">&#39;SVR (poly)&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">SVR</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;poly&#39;</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
+        <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">SVR</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;poly&#39;</span><span class="p">),</span>
         <span class="s1">&#39;scalers&#39;</span> <span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;scaler&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span><span class="n">MinMaxScaler</span><span class="p">()],</span>
+            <span class="s1">&#39;scaler&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">MinMaxScaler</span><span class="p">()],</span>
         <span class="p">},</span>
         <span class="s1">&#39;grid&#39;</span> <span class="p">:</span> <span class="p">{</span>
             <span class="s1">&#39;model__C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="o">**</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)],</span>
@@ -461,7 +453,7 @@ document.write(`
         <span class="s1">&#39;name_clf&#39;</span> <span class="p">:</span> <span class="s1">&#39;SVR (linear)&#39;</span><span class="p">,</span>
         <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">SVR</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">),</span>
         <span class="s1">&#39;scalers&#39;</span> <span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;scaler&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">MinMaxScaler</span><span class="p">()],</span>
+            <span class="s1">&#39;scaler&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">MinMaxScaler</span><span class="p">()],</span>
         <span class="p">},</span>
         <span class="s1">&#39;grid&#39;</span> <span class="p">:</span> <span class="p">{</span>
             <span class="s1">&#39;model__C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="o">**</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)],</span>
@@ -474,7 +466,7 @@ document.write(`
         <span class="s1">&#39;name_clf&#39;</span> <span class="p">:</span> <span class="s1">&#39;SVR (rbf)&#39;</span><span class="p">,</span>
         <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">SVR</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">),</span>
         <span class="s1">&#39;scalers&#39;</span> <span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;scaler&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">MinMaxScaler</span><span class="p">()],</span>
+            <span class="s1">&#39;scaler&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">MinMaxScaler</span><span class="p">()],</span>
         <span class="p">},</span>
         <span class="s1">&#39;grid&#39;</span> <span class="p">:</span> <span class="p">{</span>
             <span class="s1">&#39;model__C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="o">**</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)],</span>
@@ -487,7 +479,7 @@ document.write(`
         <span class="s1">&#39;name_clf&#39;</span> <span class="p">:</span> <span class="s1">&#39;SVR (sigmoid)&#39;</span><span class="p">,</span>
         <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">SVR</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">),</span>
         <span class="s1">&#39;scalers&#39;</span> <span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;scaler&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span><span class="n">MinMaxScaler</span><span class="p">()],</span>
+            <span class="s1">&#39;scaler&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">MinMaxScaler</span><span class="p">()],</span>
         <span class="p">},</span>
         <span class="s1">&#39;grid&#39;</span> <span class="p">:</span> <span class="p">{</span>
             <span class="s1">&#39;model__C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="o">**</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)],</span>
@@ -495,8 +487,6 @@ document.write(`
             <span class="s1">&#39;model__epsilon&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="o">**</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)],</span>
         <span class="p">}</span>
     <span class="p">},</span>
-
-
 <span class="p">]</span>
 </pre></div>
 </div>
@@ -534,7 +524,7 @@ document.write(`
         <span class="o">**</span><span class="n">dict_clf</span><span class="p">[</span><span class="s1">&#39;grid&#39;</span><span class="p">]</span>
     <span class="p">}</span>
 
-    <span class="n">clf</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;neg_mean_absolute_percentage_error&#39;</span><span class="p">)</span>
+    <span class="n">clf</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;r2&#39;</span><span class="p">)</span>
 
     <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
     <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
@@ -557,27 +547,29 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training SVR (poly)...
 Fitting 5 folds for each of 686 candidates, totalling 3430 fits
-Best params SVR (poly): 
-{&#39;model__C&#39;: 0.01, &#39;model__epsilon&#39;: 1, &#39;model__gamma&#39;: 10, &#39;scaler&#39;: None}
-CPU Time: 6547.8s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best params SVR (poly): 
+{&#39;model__C&#39;: 100, &#39;model__epsilon&#39;: 1, &#39;model__gamma&#39;: 0.1, &#39;scaler&#39;: MinMaxScaler()}
+CPU Time: 304.3s
 
 Training SVR (linear)...
-Fitting 5 folds for each of 686 candidates, totalling 3430 fits
+Fitting 5 folds for each of 1029 candidates, totalling 5145 fits
 Best params SVR (linear): 
-{&#39;model__C&#39;: 10, &#39;model__epsilon&#39;: 0.01, &#39;model__gamma&#39;: 0.001, &#39;scaler&#39;: None}
-CPU Time: 33.8s
+{&#39;model__C&#39;: 100, &#39;model__epsilon&#39;: 1, &#39;model__gamma&#39;: 0.001, &#39;scaler&#39;: None}
+CPU Time: 783.2s
 
 Training SVR (rbf)...
-Fitting 5 folds for each of 686 candidates, totalling 3430 fits
+Fitting 5 folds for each of 1029 candidates, totalling 5145 fits
 Best params SVR (rbf): 
-{&#39;model__C&#39;: 100, &#39;model__epsilon&#39;: 1, &#39;model__gamma&#39;: 0.1, &#39;scaler&#39;: None}
+{&#39;model__C&#39;: 1000, &#39;model__epsilon&#39;: 1, &#39;model__gamma&#39;: 0.1, &#39;scaler&#39;: MinMaxScaler()}
 CPU Time: 3.4s
 
 Training SVR (sigmoid)...
-Fitting 5 folds for each of 686 candidates, totalling 3430 fits
+Fitting 5 folds for each of 1029 candidates, totalling 5145 fits
 Best params SVR (sigmoid): 
 {&#39;model__C&#39;: 1000, &#39;model__epsilon&#39;: 0.1, &#39;model__gamma&#39;: 0.01, &#39;scaler&#39;: None}
-CPU Time: 2.5s
+CPU Time: 2.9s
 </pre></div>
 </div>
 </div>
@@ -593,10 +585,10 @@ CPU Time: 2.5s
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        Model  CPU time  MAPE  RMSE    R2
-   SVR (poly)    6547.8 0.112 3.540 0.832
- SVR (linear)      33.8 0.120 3.736 0.813
-    SVR (rbf)       3.4 0.102 3.289 0.855
-SVR (sigmoid)       2.5 0.129 3.891 0.797
+   SVR (poly)     304.3 0.109 3.200 0.863
+ SVR (linear)     783.2 0.116 3.507 0.835
+    SVR (rbf)       3.4 0.117 3.121 0.869
+SVR (sigmoid)       2.9 0.129 3.891 0.797
 </pre></div>
 </div>
 </div>
@@ -623,7 +615,7 @@ SVR (sigmoid)       2.5 0.129 3.891 0.797
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/61b7df7e0bfa2dba3822f0025b26ef572608da9c00b50a34996b3bcc38839454.png" src="_images/61b7df7e0bfa2dba3822f0025b26ef572608da9c00b50a34996b3bcc38839454.png" />
+<img alt="_images/fc94618128a7a60dc758c6bbbc50ca3bdf12bedf44f1ecd779e2b3f67dfcf5ea.png" src="_images/fc94618128a7a60dc758c6bbbc50ca3bdf12bedf44f1ecd779e2b3f67dfcf5ea.png" />
 </div>
 </div>
 </section>

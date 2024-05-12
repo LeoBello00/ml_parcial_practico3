@@ -53,18 +53,10 @@
     <script src="_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'exo1_cancer';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -468,11 +460,11 @@ document.write(`
         <span class="s1">&#39;name_clf&#39;</span> <span class="p">:</span> <span class="s1">&#39;SVC (poly)&#39;</span><span class="p">,</span>
         <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">SVC</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;poly&#39;</span><span class="p">),</span>
         <span class="s1">&#39;scalers&#39;</span> <span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;scaler&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">MinMaxScaler</span><span class="p">()],</span>
+            <span class="s1">&#39;scaler&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">MinMaxScaler</span><span class="p">()],</span>
         <span class="p">},</span>
         <span class="s1">&#39;grid&#39;</span> <span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;model__C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="o">**</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)],</span>
-            <span class="s1">&#39;model__gamma&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="o">**</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)],</span>
+            <span class="s1">&#39;model__C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="o">**</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)],</span>
+            <span class="s1">&#39;model__gamma&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="o">**</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)],</span>
         <span class="p">}</span>
     <span class="p">},</span>
 
@@ -518,7 +510,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>i had to use only MinMaxScaler with the poly kernel because otherwise it would have taken too much time, in my case it had been running for more than 2 days</p>
+<p>Without scaler, SVC(poly) takes more than 2 days to run so we choose to use a scaler por poly kernel.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
@@ -551,7 +543,7 @@ document.write(`
         <span class="o">**</span><span class="n">dict_clf</span><span class="p">[</span><span class="s1">&#39;grid&#39;</span><span class="p">]</span>
     <span class="p">}</span>
 
-    <span class="n">clf</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">clf</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
     <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
@@ -573,24 +565,28 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training SVC (poly)...
+Fitting 5 folds for each of 162 candidates, totalling 810 fits
 Best params SVC (poly): 
-{&#39;model__C&#39;: 0.1, &#39;model__gamma&#39;: 1, &#39;scaler&#39;: MinMaxScaler()}
-CPU Time: 1.3s
+{&#39;model__C&#39;: 0.0001, &#39;model__gamma&#39;: 10, &#39;scaler&#39;: MinMaxScaler()}
+CPU Time: 1.5s
 
 Training SVC (linear)...
+Fitting 5 folds for each of 243 candidates, totalling 1215 fits
 Best params SVC (linear): 
 {&#39;model__C&#39;: 100, &#39;model__gamma&#39;: 0.0001, &#39;scaler&#39;: MinMaxScaler()}
-CPU Time: 115.4s
+CPU Time: 91.6s
 
 Training SVC (rbf)...
+Fitting 5 folds for each of 243 candidates, totalling 1215 fits
 Best params SVC (rbf): 
 {&#39;model__C&#39;: 10, &#39;model__gamma&#39;: 0.1, &#39;scaler&#39;: MinMaxScaler()}
-CPU Time: 1.3s
+CPU Time: 1.0s
 
 Training SVC (sigmoid)...
+Fitting 5 folds for each of 243 candidates, totalling 1215 fits
 Best params SVC (sigmoid): 
 {&#39;model__C&#39;: 1000, &#39;model__gamma&#39;: 0.01, &#39;scaler&#39;: MinMaxScaler()}
-CPU Time: 0.9s
+CPU Time: 0.8s
 </pre></div>
 </div>
 </div>
@@ -606,10 +602,10 @@ CPU Time: 0.9s
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        Model  CPU time  Accuracy  Precision  Recall  f1-score   AUC
-   SVC (poly)       1.3     0.988      0.982   1.000     0.991 0.984
- SVC (linear)     115.4     0.977      0.981   0.981     0.981 0.975
-    SVC (rbf)       1.3     0.988      0.982   1.000     0.991 0.984
-SVC (sigmoid)       0.9     0.982      0.982   0.991     0.986 0.979
+   SVC (poly)       1.5     0.988      0.982   1.000     0.991 0.984
+ SVC (linear)      91.6     0.977      0.981   0.981     0.981 0.975
+    SVC (rbf)       1.0     0.988      0.982   1.000     0.991 0.984
+SVC (sigmoid)       0.8     0.982      0.982   0.991     0.986 0.979
 </pre></div>
 </div>
 </div>
@@ -643,7 +639,7 @@ SVC (sigmoid)       0.9     0.982      0.982   0.991     0.986 0.979
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_curve</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 
 <span class="k">for</span> <span class="n">model_name</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
     <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span>
@@ -657,10 +653,9 @@ SVC (sigmoid)       0.9     0.982      0.982   0.991     0.986 0.979
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ca9226d5df0672a3dfe8ada1b094973e34f657e3f2cb4143b1355e5db97a4884.png" src="_images/ca9226d5df0672a3dfe8ada1b094973e34f657e3f2cb4143b1355e5db97a4884.png" />
+<img alt="_images/9d9261916ed8a28b0a20959b380859f6ebd3d3fd110632842e44cfd2fb5f7ff5.png" src="_images/9d9261916ed8a28b0a20959b380859f6ebd3d3fd110632842e44cfd2fb5f7ff5.png" />
 </div>
 </div>
-<p>very similar AUC-ROC curves because, how we can see, the difference in AUC between the models is less than 0.1</p>
 </section>
 </section>
 
