@@ -8,6 +8,7 @@ parts:
     chapters:
       - file: exo1_cancer.ipynb
       - file: exo1_housing.ipynb
+parts:
   - caption: Exercice 2
     chapters:
       - file: exo2_fraud_eda.ipynb
