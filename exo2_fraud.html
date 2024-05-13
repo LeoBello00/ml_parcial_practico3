@@ -916,7 +916,7 @@ document.write(`
 <p>This histogram reveals that most of the rows have more than 45% of missing values. This is a significant amount of missing data, and it is important to understand the impact of these missing values on the dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">missing_values_percentage</span><span class="p">[</span><span class="n">df_fraud</span><span class="p">[</span><span class="s1">&#39;isFraud&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Fraudulent transactions&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Number of missing values (%)&#39;</span><span class="p">)</span>
@@ -933,7 +933,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/558f431cc2279dc966ca42398bcadc39a017933f47d81a89dc6164f1a6ab52ea.png" src="_images/558f431cc2279dc966ca42398bcadc39a017933f47d81a89dc6164f1a6ab52ea.png" />
+<img alt="_images/a1c820c17ab10b1b715c9c59b7d4b1258a92e3da710d5e801e14e1121e13a38d.png" src="_images/a1c820c17ab10b1b715c9c59b7d4b1258a92e3da710d5e801e14e1121e13a38d.png" />
 </div>
 </div>
 <p>These histograms show that the distribution of missing values <strong>is not</strong> similar between fraudulent and non-fraudulent transactions. This suggests that the missing values are not missing at random, and that the missing values could be related to the target variable.</p>
