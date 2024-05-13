@@ -177,7 +177,13 @@
                 </a>
             </li>
         </ul>
-        
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="exo1_cancer.html">Exercise 1: Breast cancer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exo1_housing.html">Exercise 1: Boston Housing</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Exercise 2: Fraud detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exo2_wind.html">Exercise 2: Wind speed</a></li>
+</ul>
+
     </div>
 </nav></div>
     </div>
@@ -745,18 +751,8 @@ document.write(`
       <td>99.2</td>
     </tr>
     <tr>
-      <th>id_07</th>
-      <td>585385</td>
-      <td>99.1</td>
-    </tr>
-    <tr>
-      <th>id_08</th>
-      <td>585385</td>
-      <td>99.1</td>
-    </tr>
-    <tr>
-      <th>id_27</th>
-      <td>585371</td>
+      <th>id_25</th>
+      <td>585408</td>
       <td>99.1</td>
     </tr>
     <tr>
@@ -765,13 +761,8 @@ document.write(`
       <td>99.1</td>
     </tr>
     <tr>
-      <th>id_25</th>
-      <td>585408</td>
-      <td>99.1</td>
-    </tr>
-    <tr>
-      <th>id_23</th>
-      <td>585371</td>
+      <th>id_21</th>
+      <td>585381</td>
       <td>99.1</td>
     </tr>
     <tr>
@@ -780,8 +771,23 @@ document.write(`
       <td>99.1</td>
     </tr>
     <tr>
-      <th>id_21</th>
-      <td>585381</td>
+      <th>id_23</th>
+      <td>585371</td>
+      <td>99.1</td>
+    </tr>
+    <tr>
+      <th>id_08</th>
+      <td>585385</td>
+      <td>99.1</td>
+    </tr>
+    <tr>
+      <th>id_07</th>
+      <td>585385</td>
+      <td>99.1</td>
+    </tr>
+    <tr>
+      <th>id_27</th>
+      <td>585371</td>
       <td>99.1</td>
     </tr>
     <tr>
@@ -794,6 +800,163 @@ document.write(`
 </div></div></div>
 </div>
 <p>Here we can see that some columns have a very high rate of missing values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create dataframe with missing values by line</span>
+<span class="n">missing_values_count</span> <span class="o">=</span> <span class="n">df_fraud</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">missing_values_percentage</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">missing_values_count</span> <span class="o">/</span> <span class="n">df_fraud</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">missing_values_stats</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Missing values (count)&#39;</span><span class="p">:</span> <span class="n">missing_values_count</span><span class="p">,</span>
+    <span class="s1">&#39;Missing values (%)&#39;</span><span class="p">:</span> <span class="n">missing_values_percentage</span>
+<span class="p">})</span>
+
+<span class="n">missing_values_stats</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Missing values (%)&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Missing values (count)</th>
+      <th>Missing values (%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>522237</th>
+      <td>340</td>
+      <td>78.3</td>
+    </tr>
+    <tr>
+      <th>522280</th>
+      <td>336</td>
+      <td>77.4</td>
+    </tr>
+    <tr>
+      <th>31095</th>
+      <td>332</td>
+      <td>76.5</td>
+    </tr>
+    <tr>
+      <th>474324</th>
+      <td>328</td>
+      <td>75.6</td>
+    </tr>
+    <tr>
+      <th>456111</th>
+      <td>327</td>
+      <td>75.3</td>
+    </tr>
+    <tr>
+      <th>456105</th>
+      <td>325</td>
+      <td>74.9</td>
+    </tr>
+    <tr>
+      <th>474339</th>
+      <td>325</td>
+      <td>74.9</td>
+    </tr>
+    <tr>
+      <th>474295</th>
+      <td>322</td>
+      <td>74.2</td>
+    </tr>
+    <tr>
+      <th>474270</th>
+      <td>322</td>
+      <td>74.2</td>
+    </tr>
+    <tr>
+      <th>456132</th>
+      <td>322</td>
+      <td>74.2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We have a lot of rows that have a lot of missing values, for some of them, it’s more than 70% of missing values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">missing_values_percentage</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of missing values&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of rows&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Histogram of missing values by row&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bee4ad564e1b90af9ecc2022adb943e024b6b293802ac77348fc6801f090550c.png" src="_images/bee4ad564e1b90af9ecc2022adb943e024b6b293802ac77348fc6801f090550c.png" />
+</div>
+</div>
+<p>This histogram reveals that most of the rows have more than 45% of missing values. This is a significant amount of missing data, and it is important to understand the impact of these missing values on the dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">missing_values_percentage</span><span class="p">[</span><span class="n">df_fraud</span><span class="p">[</span><span class="s1">&#39;isFraud&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Fraudulent transactions&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Number of missing values (%)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Number of rows&#39;</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">missing_values_percentage</span><span class="p">[</span><span class="n">df_fraud</span><span class="p">[</span><span class="s1">&#39;isFraud&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Non fraudulent transactions&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Number of missing values (%)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Number of rows&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/558f431cc2279dc966ca42398bcadc39a017933f47d81a89dc6164f1a6ab52ea.png" src="_images/558f431cc2279dc966ca42398bcadc39a017933f47d81a89dc6164f1a6ab52ea.png" />
+</div>
+</div>
+<p>These histograms show that the distribution of missing values <strong>is not</strong> similar between fraudulent and non-fraudulent transactions. This suggests that the missing values are not missing at random, and that the missing values could be related to the target variable.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">missing_values_stats</span><span class="p">[</span><span class="s1">&#39;isFraud&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_fraud</span><span class="p">[</span><span class="s1">&#39;isFraud&#39;</span><span class="p">]</span>
+<span class="n">missing_values_stats</span><span class="p">[</span><span class="s1">&#39;isFraud&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">missing_values_stats</span><span class="p">[</span><span class="s1">&#39;isFraud&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">({</span><span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;Non fraudulent&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;Fraudulent&#39;</span><span class="p">})</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Missing values (%)&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;isFraud&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">missing_values_stats</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of missing values (%)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Type of transaction&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Boxplot of missing values by transaction type&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/472e0008ba15f5c2ccf831c1b30534ded054252b5548b30dc5ed3deb4730e891.png" src="_images/472e0008ba15f5c2ccf831c1b30534ded054252b5548b30dc5ed3deb4730e891.png" />
+</div>
+</div>
+<p>This boxplot confirms that fraudulent transactions have less missing values than non fraudulent transactions. This is an interesting observation that could be used to improve the performance of the model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_fraud</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
