@@ -173,7 +173,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Welcome to your Jupyter Book
+                    Partial 3
                 </a>
             </li>
         </ul>
@@ -393,7 +393,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="n">df_fraud</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/data_fraud.csv&#39;</span><span class="p">)</span>
+<span class="n">df_fraud</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/data_fraud.csv&#39;</span><span class="p">)</span>
 <span class="n">df_fraud</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -745,28 +745,8 @@ document.write(`
       <td>99.2</td>
     </tr>
     <tr>
-      <th>id_25</th>
-      <td>585408</td>
-      <td>99.1</td>
-    </tr>
-    <tr>
-      <th>id_26</th>
-      <td>585377</td>
-      <td>99.1</td>
-    </tr>
-    <tr>
-      <th>id_21</th>
-      <td>585381</td>
-      <td>99.1</td>
-    </tr>
-    <tr>
-      <th>id_22</th>
-      <td>585371</td>
-      <td>99.1</td>
-    </tr>
-    <tr>
-      <th>id_23</th>
-      <td>585371</td>
+      <th>id_07</th>
+      <td>585385</td>
       <td>99.1</td>
     </tr>
     <tr>
@@ -775,13 +755,33 @@ document.write(`
       <td>99.1</td>
     </tr>
     <tr>
-      <th>id_07</th>
-      <td>585385</td>
+      <th>id_27</th>
+      <td>585371</td>
       <td>99.1</td>
     </tr>
     <tr>
-      <th>id_27</th>
+      <th>id_26</th>
+      <td>585377</td>
+      <td>99.1</td>
+    </tr>
+    <tr>
+      <th>id_25</th>
+      <td>585408</td>
+      <td>99.1</td>
+    </tr>
+    <tr>
+      <th>id_23</th>
       <td>585371</td>
+      <td>99.1</td>
+    </tr>
+    <tr>
+      <th>id_22</th>
+      <td>585371</td>
+      <td>99.1</td>
+    </tr>
+    <tr>
+      <th>id_21</th>
+      <td>585381</td>
       <td>99.1</td>
     </tr>
     <tr>
@@ -811,6 +811,81 @@ memory usage: 1.9+ GB
 </div>
 </div>
 <p>We have object columns so in our preprocessing we will have to process beacuse most of the models cannot train on non-numerical values. For exemple we can use an encoder to convert object columns to numerical columns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_object</span> <span class="o">=</span> <span class="n">df_fraud</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;DeviceInfo&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df_object</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DeviceInfo       1786
+id_33             260
+id_31             130
+id_30              75
+R_emaildomain      60
+P_emaildomain      59
+ProductCD           5
+id_34               4
+card4               4
+card6               4
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_object1</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df_object</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">df_object</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">df_object2</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df_object</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">df_object</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">40</span><span class="p">))</span>
+<span class="n">axs</span> <span class="o">=</span> <span class="n">axs</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df_object1</span><span class="p">):</span>
+    <span class="n">df_fraud</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">dropna</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">column</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/39a3480cfe3f8e85898df74ebc509039664e13167a63827d00a200bfbbecaa75.png" src="_images/39a3480cfe3f8e85898df74ebc509039664e13167a63827d00a200bfbbecaa75.png" />
+</div>
+</div>
+<p>We have a lot of features with a high number of missing values like ‘id23’, ‘id27’, ‘id28’ etc</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>
+<span class="n">axs</span> <span class="o">=</span> <span class="n">axs</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df_object2</span><span class="p">):</span>
+    <span class="n">df_fraud</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">dropna</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">column</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b84e439c42d4350152726818bc8a4d55c56a5be7287125d54e0cb9e22c3012e4.png" src="_images/b84e439c42d4350152726818bc8a4d55c56a5be7287125d54e0cb9e22c3012e4.png" />
+</div>
+</div>
+<p>These 5 last features are the one with the most number of values. Once more, we can notice a high number of missing values for some features. Moreover we can see that the repartition is very unbalanced: most of the features have actually the same features.</p>
 <p>Now we can take a look of the colinearity between the variables</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
