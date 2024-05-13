@@ -1,4 +1,5 @@
-# Partial 3 - Célien BONHOMME - Leonardo VAIA
+# Partial 3
+## Célien BONHOMME - Leonardo VAIA
 
 ```{tableofcontents}
 ```
