@@ -61,6 +61,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Preprocessing fraud dataset" href="exo3_fraud_preprocessing.html" />
     <link rel="prev" title="Exercise 2: Fraud detection" href="exo2_fraud.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -181,6 +182,11 @@
 <li class="toctree-l1"><a class="reference internal" href="exo1_housing.html">Exercise 1: Boston Housing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exo2_fraud.html">Exercise 2: Fraud detection</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Exercise 2: Wind speed</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exo3_fraud_preprocessing.html">Preprocessing fraud dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exo3_fraud_training_gs.html">Load data</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="exo3_fraud_training_bs.html">Load data</a></li>
+
 </ul>
 
     </div>
@@ -880,8 +886,7 @@ Total: added 2583
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># put hour as first column, Time as second column and then sort the rest</span>
-<span class="n">df_wind</span> <span class="o">=</span> <span class="n">df_wind</span><span class="p">[[</span><span class="s1">&#39;Hour&#39;</span><span class="p">,</span> <span class="s1">&#39;Date&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df_wind</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Hour&#39;</span><span class="p">,</span> <span class="s1">&#39;Date&#39;</span><span class="p">]])]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_wind</span> <span class="o">=</span> <span class="n">df_wind</span><span class="p">[[</span><span class="s1">&#39;Hour&#39;</span><span class="p">,</span> <span class="s1">&#39;Date&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df_wind</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Hour&#39;</span><span class="p">,</span> <span class="s1">&#39;Date&#39;</span><span class="p">]])]</span>
 <span class="n">df_wind</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1704,6 +1709,15 @@ p-value of stationarity test for Wind speed (m/s): 0.0
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Exercise 2: Fraud detection</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="exo3_fraud_preprocessing.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Preprocessing fraud dataset</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
