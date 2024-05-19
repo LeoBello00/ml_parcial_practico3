@@ -1,0 +1,1150 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Exercise 4 (Training without Bayes Optimization) &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'exo4_training_bs';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Exercise 4 (Training without Bayes Optimization)" href="exo4_training_gs.html" />
+    <link rel="prev" title="Exercise 4 (Preprocessing)" href="exo4_preprocessing.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Partial 3
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="exo1_cancer.html">Exercise 1: Breast cancer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exo1_housing.html">Exercise 1: Boston Housing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exo2_fraud.html">Exercise 2: Fraud detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exo2_wind.html">Exercise 2: Wind speed</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fexo4_training_bs.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/exo4_training_bs.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Exercise 4 (Training without Bayes Optimization)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparametrization">Hyperparametrization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results">Results</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="exercise-4-training-without-bayes-optimization">
+<h1>Exercise 4 (Training without Bayes Optimization)<a class="headerlink" href="#exercise-4-training-without-bayes-optimization" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="n">dfWind</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/data_wind_preprocessed1.csv&#39;</span><span class="p">)</span>
+<span class="n">dfWind</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Hour</th>
+      <th>Wind direction (gr)</th>
+      <th>Wind speed (m/s)</th>
+      <th>Wind gust max (m/s)</th>
+      <th>Date</th>
+      <th>Relative humidity max</th>
+      <th>Relative humidity min</th>
+      <th>Temperature max (K)</th>
+      <th>Temperature min (K)</th>
+      <th>Relative humidity</th>
+      <th>Atmospheric pressure at station level (Pa)</th>
+      <th>Precipitation (m)</th>
+      <th>Atmospheric pressure max (Pa)</th>
+      <th>Atmospheric pressure min (Pa)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>12</td>
+      <td>0.809017</td>
+      <td>1.8</td>
+      <td>3.8</td>
+      <td>2000-01-01 12:00:00</td>
+      <td>0.69</td>
+      <td>0.60</td>
+      <td>293.85</td>
+      <td>295.75</td>
+      <td>0.61</td>
+      <td>88820.0</td>
+      <td>0.0</td>
+      <td>88820.0</td>
+      <td>88770.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>13</td>
+      <td>0.965926</td>
+      <td>2.7</td>
+      <td>4.7</td>
+      <td>2000-01-01 13:00:00</td>
+      <td>0.62</td>
+      <td>0.55</td>
+      <td>295.65</td>
+      <td>297.35</td>
+      <td>0.55</td>
+      <td>88840.0</td>
+      <td>0.0</td>
+      <td>88840.0</td>
+      <td>88820.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>14</td>
+      <td>0.891007</td>
+      <td>2.0</td>
+      <td>4.9</td>
+      <td>2000-01-01 14:00:00</td>
+      <td>0.56</td>
+      <td>0.50</td>
+      <td>297.45</td>
+      <td>298.65</td>
+      <td>0.51</td>
+      <td>88810.0</td>
+      <td>0.0</td>
+      <td>88840.0</td>
+      <td>88810.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>15</td>
+      <td>0.848048</td>
+      <td>2.5</td>
+      <td>5.8</td>
+      <td>2000-01-01 15:00:00</td>
+      <td>0.52</td>
+      <td>0.44</td>
+      <td>298.15</td>
+      <td>300.55</td>
+      <td>0.44</td>
+      <td>88740.0</td>
+      <td>0.0</td>
+      <td>88810.0</td>
+      <td>88740.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>16</td>
+      <td>0.224951</td>
+      <td>2.4</td>
+      <td>5.8</td>
+      <td>2000-01-01 16:00:00</td>
+      <td>0.50</td>
+      <td>0.43</td>
+      <td>298.65</td>
+      <td>300.25</td>
+      <td>0.46</td>
+      <td>88650.0</td>
+      <td>0.0</td>
+      <td>88740.0</td>
+      <td>88650.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dfWind</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(90276, 14)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span><span class="p">,</span> <span class="n">Lasso</span><span class="p">,</span> <span class="n">Ridge</span><span class="p">,</span> <span class="n">BayesianRidge</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span><span class="p">,</span> <span class="n">GradientBoostingRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span><span class="p">,</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVR</span>
+<span class="kn">from</span> <span class="nn">skopt.space</span> <span class="kn">import</span> <span class="n">Real</span><span class="p">,</span> <span class="n">Categorical</span><span class="p">,</span> <span class="n">Integer</span>
+
+<span class="n">n_col</span> <span class="o">=</span> <span class="n">dfWind</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">models_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;SVR&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">SVR</span><span class="p">(),</span>
+        <span class="s1">&#39;scalers&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;scaler&#39;</span><span class="p">:</span> <span class="n">Categorical</span><span class="p">([</span><span class="n">MinMaxScaler</span><span class="p">(),</span> <span class="n">StandardScaler</span><span class="p">()])</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;grid&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;model__C&#39;</span><span class="p">:</span> <span class="n">Real</span><span class="p">(</span><span class="mf">0.0001</span><span class="p">,</span> <span class="mi">10000</span><span class="p">),</span>
+            <span class="s1">&#39;model__epsilon&#39;</span><span class="p">:</span> <span class="n">Real</span><span class="p">(</span><span class="mf">0.0001</span><span class="p">,</span> <span class="mi">10000</span><span class="p">),</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;best_params&#39;</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="p">},</span>
+
+    <span class="s1">&#39;Linear Regression&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">LinearRegression</span><span class="p">(),</span>
+        <span class="s1">&#39;scalers&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;scaler&#39;</span><span class="p">:</span> <span class="n">Categorical</span><span class="p">([</span><span class="kc">None</span><span class="p">,</span> <span class="n">MinMaxScaler</span><span class="p">(),</span> <span class="n">StandardScaler</span><span class="p">()])</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;grid&#39;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s1">&#39;best_params&#39;</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="p">},</span>
+
+    <span class="s1">&#39;Bayesian Ridge&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">BayesianRidge</span><span class="p">(),</span>
+        <span class="s1">&#39;scalers&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;scaler&#39;</span><span class="p">:</span> <span class="n">Categorical</span><span class="p">([</span><span class="kc">None</span><span class="p">,</span> <span class="n">MinMaxScaler</span><span class="p">(),</span> <span class="n">StandardScaler</span><span class="p">()])</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;grid&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;model__alpha_1&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.000001</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">),</span>
+            <span class="s1">&#39;model__alpha_2&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.000001</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">),</span>
+            <span class="s1">&#39;model__lambda_1&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.000001</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">),</span>
+            <span class="s1">&#39;model__lambda_2&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.000001</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">),</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;best_params&#39;</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="p">},</span>
+
+    <span class="s1">&#39;Decision Tree&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
+        <span class="s1">&#39;scalers&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;scaler&#39;</span><span class="p">:</span> <span class="n">Categorical</span><span class="p">([</span><span class="kc">None</span><span class="p">])</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;grid&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;model__max_depth&#39;</span><span class="p">:</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_col</span><span class="p">),</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;best_params&#39;</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="p">},</span>
+
+    <span class="s1">&#39;Random Forest&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
+        <span class="s1">&#39;scalers&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;scaler&#39;</span><span class="p">:</span> <span class="n">Categorical</span><span class="p">([</span><span class="kc">None</span><span class="p">])</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;grid&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;model__max_depth&#39;</span><span class="p">:</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_col</span><span class="p">),</span>
+            <span class="s1">&#39;model__n_estimators&#39;</span><span class="p">:</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;best_params&#39;</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="p">},</span>
+
+    <span class="s1">&#39;Gradient Boosting&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">GradientBoostingRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
+        <span class="s1">&#39;scalers&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;scaler&#39;</span><span class="p">:</span> <span class="n">Categorical</span><span class="p">([</span><span class="kc">None</span><span class="p">])</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;grid&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;model__max_depth&#39;</span><span class="p">:</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_col</span><span class="p">),</span>
+            <span class="s1">&#39;model__n_estimators&#39;</span><span class="p">:</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span>            
+        <span class="p">},</span>
+        <span class="s1">&#39;best_params&#39;</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="p">},</span>
+
+    <span class="s1">&#39;K-NN&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">KNeighborsRegressor</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">),</span>
+        <span class="s1">&#39;scalers&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;scaler&#39;</span><span class="p">:</span> <span class="n">Categorical</span><span class="p">([</span><span class="kc">None</span><span class="p">,</span> <span class="n">MinMaxScaler</span><span class="p">(),</span> <span class="n">StandardScaler</span><span class="p">()])</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;grid&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;model__n_neighbors&#39;</span><span class="p">:</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;best_params&#39;</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="p">},</span>
+
+    <span class="s1">&#39;Ridge&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
+        <span class="s1">&#39;scalers&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;scaler&#39;</span><span class="p">:</span> <span class="n">Categorical</span><span class="p">([</span><span class="kc">None</span><span class="p">,</span> <span class="n">MinMaxScaler</span><span class="p">(),</span> <span class="n">StandardScaler</span><span class="p">()])</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;grid&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;model__alpha&#39;</span><span class="p">:</span> <span class="n">Real</span><span class="p">(</span><span class="mf">0.0001</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;best_params&#39;</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="p">},</span>
+
+    <span class="s1">&#39;Lasso&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">Lasso</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
+        <span class="s1">&#39;scalers&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;scaler&#39;</span><span class="p">:</span> <span class="n">Categorical</span><span class="p">([</span><span class="kc">None</span><span class="p">,</span> <span class="n">MinMaxScaler</span><span class="p">(),</span> <span class="n">StandardScaler</span><span class="p">()])</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;grid&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;model__alpha&#39;</span><span class="p">:</span> <span class="n">Real</span><span class="p">(</span><span class="mf">0.0001</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;best_params&#39;</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+
+<span class="n">number_of_days</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">365</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">name</span><span class="p">:{</span>
+            <span class="n">numDays</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;pred&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;test&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;cpu_time&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;MAPEs&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;R2s&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;RMSEs&#39;</span><span class="p">:</span> <span class="p">[]</span>
+            <span class="p">}</span> <span class="k">for</span> <span class="n">numDays</span> <span class="ow">in</span> <span class="n">number_of_days</span>
+        <span class="p">}</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">models_dict</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="hyperparametrization">
+<h2>Hyperparametrization<a class="headerlink" href="#hyperparametrization" title="Link to this heading">#</a></h2>
+<p>We find the best parameters only on the first set to avoid a too big data lake</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skopt</span> <span class="kn">import</span> <span class="n">BayesSearchCV</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="n">path_tuning</span> <span class="o">=</span> <span class="s1">&#39;../pickle/wind/tuning_bs.pkl&#39;</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path_tuning</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">models_dict</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tuning </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+        <span class="n">model_dict</span> <span class="o">=</span> <span class="n">models_dict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="o">**</span><span class="n">model_dict</span><span class="p">[</span><span class="s1">&#39;scalers&#39;</span><span class="p">],</span>
+            <span class="o">**</span><span class="n">model_dict</span><span class="p">[</span><span class="s1">&#39;grid&#39;</span><span class="p">]</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">numDays</span> <span class="ow">in</span> <span class="n">number_of_days</span><span class="p">:</span>
+            <span class="n">X_train</span> <span class="o">=</span> <span class="n">dfWind</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">numDays</span><span class="o">*</span><span class="mi">24</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Wind speed (m/s)&#39;</span><span class="p">,</span> <span class="s1">&#39;Date&#39;</span><span class="p">])</span>
+            <span class="n">y_train</span> <span class="o">=</span> <span class="n">dfWind</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">numDays</span><span class="o">*</span><span class="mi">24</span><span class="p">][</span><span class="s1">&#39;Wind speed (m/s)&#39;</span><span class="p">]</span>
+            <span class="n">steps</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                <span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">model_dict</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">]))</span>
+            <span class="p">]</span>
+            <span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span>
+            <span class="n">search_cv</span> <span class="o">=</span> <span class="n">BayesSearchCV</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">search_space</span><span class="o">=</span><span class="n">param_grid</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;r2&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+            <span class="n">search_cv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+            <span class="n">results_dict</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">numDays</span><span class="p">][</span><span class="s1">&#39;model&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">search_cv</span><span class="o">.</span><span class="n">best_estimator_</span>
+            <span class="n">model_dict</span><span class="p">[</span><span class="s1">&#39;best_params&#39;</span><span class="p">][</span><span class="n">numDays</span><span class="p">]</span> <span class="o">=</span> <span class="n">search_cv</span><span class="o">.</span><span class="n">best_params_</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">numDays</span><span class="si">}</span><span class="s2"> days =&gt; </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">s =&gt; </span><span class="si">{</span><span class="n">search_cv</span><span class="o">.</span><span class="n">best_params_</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path_tuning</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">results_dict</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path_tuning</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">results_dict</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tuning SVR...
+1 days =&gt; 2.6s =&gt; {&#39;model__C&#39;: 0.01, &#39;model__epsilon&#39;: 0.001, &#39;model__kernel&#39;: &#39;poly&#39;, &#39;scaler&#39;: MinMaxScaler()}
+3 days =&gt; 3.9s =&gt; {&#39;model__C&#39;: 0.1, &#39;model__epsilon&#39;: 0.1, &#39;model__kernel&#39;: &#39;poly&#39;, &#39;scaler&#39;: MinMaxScaler()}
+7 days =&gt; 14.9s =&gt; {&#39;model__C&#39;: 10, &#39;model__epsilon&#39;: 0.01, &#39;model__kernel&#39;: &#39;linear&#39;, &#39;scaler&#39;: MinMaxScaler()}
+14 days =&gt; 80.5s =&gt; {&#39;model__C&#39;: 1, &#39;model__epsilon&#39;: 0.1, &#39;model__kernel&#39;: &#39;linear&#39;, &#39;scaler&#39;: StandardScaler()}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="training">
+<h2>Training<a class="headerlink" href="#training" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">model_evaluation_lr</span>
+
+
+<span class="n">path_results</span> <span class="o">=</span> <span class="s1">&#39;../pickle/wind/results_bs.pkl&#39;</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path_results</span><span class="p">):</span>
+    <span class="n">dict_pred</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">dfWind</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Wind speed (m/s)&#39;</span><span class="p">,</span> <span class="s1">&#39;Date&#39;</span><span class="p">])</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">dfWind</span><span class="p">[</span><span class="s1">&#39;Wind speed (m/s)&#39;</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">models_dict</span><span class="p">):</span>
+        <span class="n">model_dict</span> <span class="o">=</span> <span class="n">models_dict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">numDays</span> <span class="ow">in</span> <span class="n">number_of_days</span><span class="p">:</span>
+            <span class="n">best_params_cleaned</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;model__&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">):</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">model_dict</span><span class="p">[</span><span class="s1">&#39;best_params&#39;</span><span class="p">][</span><span class="n">numDays</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;model__&#39;</span><span class="p">)}</span>
+            <span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">model_dict</span><span class="p">[</span><span class="s1">&#39;best_params&#39;</span><span class="p">][</span><span class="n">numDays</span><span class="p">][</span><span class="s1">&#39;scaler&#39;</span><span class="p">]),</span>
+                    <span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">model_dict</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="o">**</span><span class="n">best_params_cleaned</span><span class="p">)),</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">numDays</span><span class="si">}</span><span class="s1"> days&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dfWind</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="n">numDays</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">24</span><span class="p">,</span> <span class="mi">24</span><span class="p">):</span>
+                <span class="n">X_train</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">j</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="n">numDays</span><span class="o">*</span><span class="mi">24</span><span class="p">]</span>
+                <span class="n">y_train</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">j</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="n">numDays</span><span class="o">*</span><span class="mi">24</span><span class="p">]</span>
+                <span class="n">X_valid</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="n">numDays</span><span class="o">*</span><span class="mi">24</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="p">((</span><span class="n">numDays</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">24</span><span class="p">)]</span>
+                <span class="n">y_valid</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="n">numDays</span><span class="o">*</span><span class="mi">24</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="p">((</span><span class="n">numDays</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">24</span><span class="p">)]</span>
+                
+                <span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+                <span class="n">y_pred</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_valid</span><span class="p">)</span>
+                <span class="n">eval_lr</span> <span class="o">=</span> <span class="n">model_evaluation_lr</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_valid</span><span class="p">)</span>
+
+                <span class="n">results_numDays</span> <span class="o">=</span> <span class="n">results_dict</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">numDays</span><span class="p">]</span>
+                <span class="n">results_numDays</span><span class="p">[</span><span class="s1">&#39;pred&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+                <span class="n">results_numDays</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">y_valid</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+                <span class="n">results_numDays</span><span class="p">[</span><span class="s1">&#39;MAPEs&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">eval_lr</span><span class="p">[</span><span class="s1">&#39;mape&#39;</span><span class="p">])</span>
+                <span class="n">results_numDays</span><span class="p">[</span><span class="s1">&#39;R2s&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">eval_lr</span><span class="p">[</span><span class="s1">&#39;r2&#39;</span><span class="p">])</span>
+                <span class="n">results_numDays</span><span class="p">[</span><span class="s1">&#39;RMSEs&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">eval_lr</span><span class="p">[</span><span class="s1">&#39;rmse&#39;</span><span class="p">])</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+            <span class="n">cpu_time</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; =&gt; </span><span class="si">{</span><span class="n">cpu_time</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+            <span class="n">results_numDays</span><span class="p">[</span><span class="s1">&#39;cpu_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cpu_time</span>
+        <span class="nb">print</span><span class="p">()</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path_results</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">results_dict</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path_results</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">results_dict</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="results">
+<h2>Results<a class="headerlink" href="#results" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_overall</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Model&#39;</span><span class="p">,</span> <span class="s1">&#39;CPU time&#39;</span><span class="p">,</span> <span class="s1">&#39;MAPE&#39;</span><span class="p">,</span> <span class="s1">&#39;R2&#39;</span><span class="p">,</span> <span class="s1">&#39;RMSE&#39;</span><span class="p">])</span>
+
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">results_dict</span><span class="p">:</span>
+    <span class="n">model_dict</span> <span class="o">=</span> <span class="n">models_dict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">numDays</span> <span class="ow">in</span> <span class="n">model_dict</span><span class="p">[</span><span class="s1">&#39;n_days&#39;</span><span class="p">]:</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">results_dict</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">numDays</span><span class="p">]</span>
+        <span class="nb">eval</span> <span class="o">=</span> <span class="n">model_evaluation_lr</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;pred&#39;</span><span class="p">],</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">])</span>
+        <span class="n">new_row</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;Model&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">numDays</span><span class="si">}</span><span class="s2"> days)&quot;</span><span class="p">,</span>
+            <span class="s1">&#39;CPU time&#39;</span><span class="p">:</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;cpu_time&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;MAPE&#39;</span><span class="p">:</span> <span class="nb">eval</span><span class="p">[</span><span class="s1">&#39;mape&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;R2&#39;</span><span class="p">:</span> <span class="nb">eval</span><span class="p">[</span><span class="s1">&#39;r2&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;RMSE&#39;</span><span class="p">:</span> <span class="nb">eval</span><span class="p">[</span><span class="s1">&#39;rmse&#39;</span><span class="p">]</span>
+        <span class="p">}</span>
+        <span class="n">results_overall</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">results_overall</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">new_row</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_overall</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;R2&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">results_overall</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                     Model  CPU time         MAPE     R2    RMSE
+Gradient Boosting (3 days)     193.2 3.820000e-01  0.580   0.739
+    Random Forest (3 days)      34.5 5.642482e+11  0.574   0.737
+    Random Forest (2 days)     115.0 9.984037e+09  0.501   0.764
+    Decision Tree (3 days)       9.2 3.660706e+13  0.499   0.871
+    Decision Tree (2 days)       8.8 7.570750e+13  0.431   0.950
+   Bayesian Ridge (3 days)      12.0 4.420000e-01  0.415   1.179
+            Ridge (3 days)      10.1 6.820000e-01  0.410   1.194
+            Lasso (3 days)      10.9 4.080000e-01  0.385   1.281
+Gradient Boosting (1 days)     165.7 5.600000e-01  0.353   0.909
+Linear Regression (3 days)       8.0 5.430000e-01  0.313   1.527
+    Random Forest (1 days)     189.6 3.360000e-01  0.264   0.891
+            Lasso (2 days)      11.1 8.780000e-01  0.245   1.803
+   Bayesian Ridge (2 days)      11.9 5.520000e-01  0.243   1.724
+            Ridge (2 days)      10.3 6.790000e-01  0.223   1.917
+Linear Regression (2 days)      10.5 7.560000e-01  0.215   1.970
+              SVR (2 days)      13.4 6.300000e-01  0.211   1.955
+            Lasso (1 days)      10.6 6.080000e-01  0.194   1.947
+   Bayesian Ridge (1 days)      12.1 3.349000e+00  0.161   2.061
+             K-NN (3 days)      78.1 5.492682e+11  0.155   0.962
+Linear Regression (1 days)      10.5 1.812000e+00  0.123   2.672
+    Decision Tree (1 days)       8.2 1.008120e+12  0.082   1.060
+              SVR (3 days)      12.3 4.230000e-01 -0.000  72.985
+              SVR (1 days)      11.3 5.360000e-01 -0.000 836.514
+Gradient Boosting (2 days)      18.0 3.200000e-01 -0.434   0.951
+             K-NN (2 days)      77.7 4.030000e-01 -0.517   1.083
+             K-NN (1 days)      10.4 4.310000e-01 -0.522   1.115
+            Ridge (1 days)      10.0 4.400000e-01 -1.563   1.250
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+<span class="n">axs</span> <span class="o">=</span> <span class="n">axs</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">results_dict</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">numDays</span> <span class="ow">in</span> <span class="n">models_dict</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s1">&#39;n_days&#39;</span><span class="p">]:</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">results_dict</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">numDays</span><span class="p">]</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;pred&#39;</span><span class="p">]</span>
+        <span class="n">y_test</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">]</span>
+        <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">y_test</span><span class="p">)],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">y_test</span><span class="p">)],</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">numDays</span><span class="si">}</span><span class="s2"> days)&quot;</span><span class="p">)</span>
+        <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">y_test</span><span class="p">))</span>
+        <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;True values&#39;</span><span class="p">)</span>
+        <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Predicted values&#39;</span><span class="p">)</span>
+        <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/dc4b4ef4c588207e5868b3fc8550c81338e2bbe57fb14f861da1086840af52e1.png" src="_images/dc4b4ef4c588207e5868b3fc8550c81338e2bbe57fb14f861da1086840af52e1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">random</span> <span class="k">as</span> <span class="nn">rd</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+<span class="n">axs</span> <span class="o">=</span> <span class="n">axs</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">results_dict</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">numDays</span> <span class="ow">in</span> <span class="n">models_dict</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s1">&#39;n_days&#39;</span><span class="p">]:</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">results_dict</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">numDays</span><span class="p">][</span><span class="s1">&#39;pred&#39;</span><span class="p">]</span>
+        <span class="n">test</span> <span class="o">=</span> <span class="n">results_dict</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">numDays</span><span class="p">][</span><span class="s1">&#39;test&#39;</span><span class="p">]</span>
+        <span class="n">residuals</span> <span class="o">=</span> <span class="n">rd</span><span class="o">.</span><span class="n">sample</span><span class="p">([</span><span class="n">val_pred</span> <span class="o">-</span> <span class="n">val_test</span> <span class="k">for</span> <span class="n">val_pred</span><span class="p">,</span> <span class="n">val_test</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">test</span><span class="p">)],</span> <span class="mi">5000</span><span class="p">)</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">numDays</span><span class="si">}</span><span class="s2"> days&quot;</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">)</span>
+
+    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Residuals&#39;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Density&#39;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/573cc24a8c0d9e3efb623fbfcb40f2349a18380089b2a76e57d78a940f19088d.png" src="_images/573cc24a8c0d9e3efb623fbfcb40f2349a18380089b2a76e57d78a940f19088d.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span><span class="p">,</span> <span class="n">shapiro</span>
+
+<span class="n">df_gaussian_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Model&#39;</span><span class="p">,</span> <span class="s1">&#39;Mean&#39;</span><span class="p">,</span> <span class="s1">&#39;Std&#39;</span><span class="p">,</span> <span class="s1">&#39;p_value&#39;</span><span class="p">])</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">results_dict</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">numDays</span> <span class="ow">in</span> <span class="n">models_dict</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s1">&#39;n_days&#39;</span><span class="p">]:</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">results_dict</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">numDays</span><span class="p">][</span><span class="s1">&#39;pred&#39;</span><span class="p">]</span>
+        <span class="n">test</span> <span class="o">=</span> <span class="n">results_dict</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">numDays</span><span class="p">][</span><span class="s1">&#39;test&#39;</span><span class="p">]</span>
+        <span class="n">residuals</span> <span class="o">=</span> <span class="p">[</span><span class="n">val_pred</span> <span class="o">-</span> <span class="n">val_test</span> <span class="k">for</span> <span class="n">val_pred</span><span class="p">,</span> <span class="n">val_test</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">test</span><span class="p">)]</span>
+        <span class="n">mean</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">shapiro</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
+        <span class="n">new_row</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;Model&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">numDays</span><span class="si">}</span><span class="s2"> days)&quot;</span><span class="p">,</span>
+            <span class="s1">&#39;Mean&#39;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+            <span class="s1">&#39;Std&#39;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">std</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+            <span class="s1">&#39;p_value&#39;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">p_value</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="n">df_gaussian_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_gaussian_test</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">new_row</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_gaussian_test</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;Std&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_gaussian_test</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                     Model  Mean    Std  p_value
+Gradient Boosting (3 days) -0.02   0.74      0.0
+    Random Forest (3 days) -0.01   0.74      0.0
+    Random Forest (2 days) -0.01   0.76      0.0
+    Decision Tree (3 days) -0.03   0.87      0.0
+    Random Forest (1 days)  0.00   0.89      0.0
+Gradient Boosting (1 days) -0.00   0.91      0.0
+Gradient Boosting (2 days) -0.01   0.95      0.0
+    Decision Tree (2 days) -0.02   0.95      0.0
+             K-NN (3 days) -0.02   0.96      0.0
+    Decision Tree (1 days) -0.00   1.06      0.0
+             K-NN (2 days) -0.06   1.08      0.0
+             K-NN (1 days) -0.09   1.11      0.0
+   Bayesian Ridge (3 days) -0.05   1.18      0.0
+            Ridge (3 days) -0.05   1.19      0.0
+            Ridge (1 days) -0.00   1.25      0.0
+            Lasso (3 days) -0.04   1.28      0.0
+Linear Regression (3 days) -0.04   1.53      0.0
+   Bayesian Ridge (2 days) -0.05   1.72      0.0
+            Lasso (2 days) -0.05   1.80      0.0
+            Ridge (2 days) -0.05   1.92      0.0
+            Lasso (1 days) -0.06   1.95      0.0
+              SVR (2 days) -0.03   1.96      0.0
+Linear Regression (2 days) -0.05   1.97      0.0
+   Bayesian Ridge (1 days) -0.07   2.06      0.0
+Linear Regression (1 days) -0.07   2.67      0.0
+              SVR (3 days) -0.30  72.98      0.0
+              SVR (1 days) -2.81 836.51      0.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_model</span> <span class="o">=</span> <span class="s1">&#39;Random Forest&#39;</span>
+<span class="n">best_nb_days</span> <span class="o">=</span> <span class="mi">365</span>
+
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">results_dict</span><span class="p">[</span><span class="n">best_model</span><span class="p">][</span><span class="n">best_nb_days</span><span class="p">][</span><span class="s1">&#39;test&#39;</span><span class="p">]</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">results_dict</span><span class="p">[</span><span class="n">best_model</span><span class="p">][</span><span class="n">best_nb_days</span><span class="p">][</span><span class="s1">&#39;pred&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">best_model</span> <span class="o">=</span> <span class="s1">&#39;Decision Tree&#39;</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">best_nb_days</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">results_dict</span><span class="p">[</span><span class="n">best_model</span><span class="p">][</span><span class="n">best_nb_days</span><span class="p">][</span><span class="s1">&#39;test&#39;</span><span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">results_dict</span><span class="p">[</span><span class="n">best_model</span><span class="p">][</span><span class="n">best_nb_days</span><span class="p">][</span><span class="s1">&#39;pred&#39;</span><span class="p">]</span>
+
+<span class="ne">KeyError</span>: 7
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">plotly</span> <span class="kn">import</span> <span class="n">graph_objs</span> <span class="k">as</span> <span class="n">go</span>
+<span class="n">plot</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+
+
+<span class="n">plot</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span> <span class="n">dfWind</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">y_test</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;True&#39;</span><span class="p">))</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span> <span class="n">dfWind</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Predicted&#39;</span><span class="p">))</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">best_model</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">best_nb_days</span><span class="si">}</span><span class="s1"> days)&#39;</span><span class="p">,</span> <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">yaxis_title</span><span class="o">=</span><span class="s1">&#39;Wind speed (m/s)&#39;</span><span class="p">)</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="exo4_preprocessing.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Exercise 4 (Preprocessing)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="exo4_training_gs.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Exercise 4 (Training without Bayes Optimization)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparametrization">Hyperparametrization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results">Results</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
