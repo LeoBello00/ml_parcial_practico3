@@ -2,9 +2,6 @@
 import pandas as pd
 import numpy as np
 from statsmodels.stats.outliers_influence import variance_inflation_factor
-from tqdm import tqdm
-import itertools
-from sklearn.model_selection import cross_val_score
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, mean_absolute_percentage_error, mean_squared_error, r2_score
 from time import time
 
@@ -19,8 +16,7 @@ def model_evaluation_clf(model, X_test, y_test):
     return {'accuracy': accuracy, 'precision': precision, 'recall': recall, 'f1': f1, 'roc_auc': roc_auc}
 
 
-def model_evaluation_lr(model, X_test, y_test):
-    y_pred = model.predict(X_test)
+def model_evaluation_lr(y_test, y_pred):
     mape = round(mean_absolute_percentage_error(y_test, y_pred), 3)
     rmse = round(np.sqrt(mean_squared_error(y_test, y_pred)), 3)
     r2 = round(r2_score(y_test, y_pred), 3)
