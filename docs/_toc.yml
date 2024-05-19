@@ -11,3 +11,6 @@ chapters:
 - file: exo3_fraud_preprocessing
 - file: exo3_fraud_training_gs
 - file: exo3_fraud_training_bs
+- file: exo4_preprocessing
+- file: exo4_training_bs
+- file: exo4_training_gs
