@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
@@ -177,11 +177,17 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="exo1_cancer.html">Exercise 1: Breast cancer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exo1_housing.html">Exercise 1: Boston Housing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exo2_fraud.html">Exercise 2: Fraud detection</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exo2_wind.html">Exercise 2: Wind speed</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exo3_preprocessing.html">Exercise 3 (Preprocessing)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exo3_training_gs.html">Exercise 3 (Training without Bayes Optimization)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exo3_training_bs.html">Exercise 3 (Training with Bayes Optimization)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exo4_preprocessing.html">Exercise 4 (Preprocessing)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Exercise 4 (Training without Bayes Optimization)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exo4_training_gs.html">Exercise 4 (Training without Bayes Optimization)</a></li>
 </ul>
 
     </div>
@@ -424,107 +430,65 @@ document.write(`
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Hour</th>
       <th>Wind direction (gr)</th>
-      <th>Wind speed (m/s)</th>
       <th>Wind gust max (m/s)</th>
-      <th>Date</th>
-      <th>Relative humidity max</th>
       <th>Relative humidity min</th>
-      <th>Temperature max (K)</th>
-      <th>Temperature min (K)</th>
-      <th>Relative humidity</th>
-      <th>Atmospheric pressure at station level (Pa)</th>
       <th>Precipitation (m)</th>
-      <th>Atmospheric pressure max (Pa)</th>
-      <th>Atmospheric pressure min (Pa)</th>
+      <th>Wind speed (m/s)</th>
+      <th>Date</th>
+      <th>Hour</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>12</td>
       <td>0.809017</td>
-      <td>1.8</td>
       <td>3.8</td>
-      <td>2000-01-01 12:00:00</td>
-      <td>0.69</td>
       <td>0.60</td>
-      <td>293.85</td>
-      <td>295.75</td>
-      <td>0.61</td>
-      <td>88820.0</td>
       <td>0.0</td>
-      <td>88820.0</td>
-      <td>88770.0</td>
+      <td>1.8</td>
+      <td>2000-01-01 12:00:00</td>
+      <td>12</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>13</td>
       <td>0.965926</td>
-      <td>2.7</td>
       <td>4.7</td>
-      <td>2000-01-01 13:00:00</td>
-      <td>0.62</td>
       <td>0.55</td>
-      <td>295.65</td>
-      <td>297.35</td>
-      <td>0.55</td>
-      <td>88840.0</td>
       <td>0.0</td>
-      <td>88840.0</td>
-      <td>88820.0</td>
+      <td>2.7</td>
+      <td>2000-01-01 13:00:00</td>
+      <td>13</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>14</td>
       <td>0.891007</td>
-      <td>2.0</td>
       <td>4.9</td>
-      <td>2000-01-01 14:00:00</td>
-      <td>0.56</td>
       <td>0.50</td>
-      <td>297.45</td>
-      <td>298.65</td>
-      <td>0.51</td>
-      <td>88810.0</td>
       <td>0.0</td>
-      <td>88840.0</td>
-      <td>88810.0</td>
+      <td>2.0</td>
+      <td>2000-01-01 14:00:00</td>
+      <td>14</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>15</td>
       <td>0.848048</td>
-      <td>2.5</td>
       <td>5.8</td>
-      <td>2000-01-01 15:00:00</td>
-      <td>0.52</td>
       <td>0.44</td>
-      <td>298.15</td>
-      <td>300.55</td>
-      <td>0.44</td>
-      <td>88740.0</td>
       <td>0.0</td>
-      <td>88810.0</td>
-      <td>88740.0</td>
+      <td>2.5</td>
+      <td>2000-01-01 15:00:00</td>
+      <td>15</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>16</td>
       <td>0.224951</td>
-      <td>2.4</td>
       <td>5.8</td>
-      <td>2000-01-01 16:00:00</td>
-      <td>0.50</td>
       <td>0.43</td>
-      <td>298.65</td>
-      <td>300.25</td>
-      <td>0.46</td>
-      <td>88650.0</td>
       <td>0.0</td>
-      <td>88740.0</td>
-      <td>88650.0</td>
+      <td>2.4</td>
+      <td>2000-01-01 16:00:00</td>
+      <td>16</td>
     </tr>
   </tbody>
 </table>
@@ -537,7 +501,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(90276, 14)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(90276, 7)
 </pre></div>
 </div>
 </div>
@@ -565,6 +529,7 @@ document.write(`
             <span class="s1">&#39;model__epsilon&#39;</span><span class="p">:</span> <span class="n">Real</span><span class="p">(</span><span class="mf">0.0001</span><span class="p">,</span> <span class="mi">10000</span><span class="p">),</span>
         <span class="p">},</span>
         <span class="s1">&#39;best_params&#39;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s1">&#39;n_days&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
     <span class="p">},</span>
 
     <span class="s1">&#39;Linear Regression&#39;</span><span class="p">:</span> <span class="p">{</span>
@@ -574,6 +539,7 @@ document.write(`
         <span class="p">},</span>
         <span class="s1">&#39;grid&#39;</span><span class="p">:</span> <span class="p">{},</span>
         <span class="s1">&#39;best_params&#39;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s1">&#39;n_days&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">365</span><span class="p">]</span>
     <span class="p">},</span>
 
     <span class="s1">&#39;Bayesian Ridge&#39;</span><span class="p">:</span> <span class="p">{</span>
@@ -588,6 +554,7 @@ document.write(`
             <span class="s1">&#39;model__lambda_2&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.000001</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">),</span>
         <span class="p">},</span>
         <span class="s1">&#39;best_params&#39;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s1">&#39;n_days&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">365</span><span class="p">]</span>
     <span class="p">},</span>
 
     <span class="s1">&#39;Decision Tree&#39;</span><span class="p">:</span> <span class="p">{</span>
@@ -599,6 +566,7 @@ document.write(`
             <span class="s1">&#39;model__max_depth&#39;</span><span class="p">:</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_col</span><span class="p">),</span>
         <span class="p">},</span>
         <span class="s1">&#39;best_params&#39;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s1">&#39;n_days&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">365</span><span class="p">]</span>
     <span class="p">},</span>
 
     <span class="s1">&#39;Random Forest&#39;</span><span class="p">:</span> <span class="p">{</span>
@@ -611,6 +579,7 @@ document.write(`
             <span class="s1">&#39;model__n_estimators&#39;</span><span class="p">:</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
         <span class="p">},</span>
         <span class="s1">&#39;best_params&#39;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s1">&#39;n_days&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">365</span><span class="p">]</span>
     <span class="p">},</span>
 
     <span class="s1">&#39;Gradient Boosting&#39;</span><span class="p">:</span> <span class="p">{</span>
@@ -623,6 +592,7 @@ document.write(`
             <span class="s1">&#39;model__n_estimators&#39;</span><span class="p">:</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span>            
         <span class="p">},</span>
         <span class="s1">&#39;best_params&#39;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s1">&#39;n_days&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">365</span><span class="p">]</span>
     <span class="p">},</span>
 
     <span class="s1">&#39;K-NN&#39;</span><span class="p">:</span> <span class="p">{</span>
@@ -634,6 +604,7 @@ document.write(`
             <span class="s1">&#39;model__n_neighbors&#39;</span><span class="p">:</span> <span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
         <span class="p">},</span>
         <span class="s1">&#39;best_params&#39;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s1">&#39;n_days&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">365</span><span class="p">]</span>
     <span class="p">},</span>
 
     <span class="s1">&#39;Ridge&#39;</span><span class="p">:</span> <span class="p">{</span>
@@ -645,6 +616,7 @@ document.write(`
             <span class="s1">&#39;model__alpha&#39;</span><span class="p">:</span> <span class="n">Real</span><span class="p">(</span><span class="mf">0.0001</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
         <span class="p">},</span>
         <span class="s1">&#39;best_params&#39;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s1">&#39;n_days&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">365</span><span class="p">]</span>
     <span class="p">},</span>
 
     <span class="s1">&#39;Lasso&#39;</span><span class="p">:</span> <span class="p">{</span>
@@ -656,10 +628,9 @@ document.write(`
             <span class="s1">&#39;model__alpha&#39;</span><span class="p">:</span> <span class="n">Real</span><span class="p">(</span><span class="mf">0.0001</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
         <span class="p">},</span>
         <span class="s1">&#39;best_params&#39;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s1">&#39;n_days&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">365</span><span class="p">]</span>
     <span class="p">},</span>
 <span class="p">}</span>
-
-<span class="n">number_of_days</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">365</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -670,9 +641,16 @@ document.write(`
         <span class="n">name</span><span class="p">:{</span>
             <span class="n">numDays</span><span class="p">:</span> <span class="p">{</span>
                 <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;pred&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;test&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;cpu_time&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;MAPEs&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;R2s&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;RMSEs&#39;</span><span class="p">:</span> <span class="p">[]</span>
-            <span class="p">}</span> <span class="k">for</span> <span class="n">numDays</span> <span class="ow">in</span> <span class="n">number_of_days</span>
+            <span class="p">}</span> <span class="k">for</span> <span class="n">numDays</span> <span class="ow">in</span> <span class="n">models_dict</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s1">&#39;n_days&#39;</span><span class="p">]</span>
         <span class="p">}</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">models_dict</span>
 <span class="p">}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">results_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;SVR&#39;: {1: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 3: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 7: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 14: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 21: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 30: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}}, &#39;Linear Regression&#39;: {1: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 3: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 7: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 14: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 21: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 30: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 60: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 90: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 180: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 365: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}}, &#39;Bayesian Ridge&#39;: {1: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 3: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 7: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 14: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 21: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 30: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 60: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 90: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 180: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 365: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}}, &#39;Decision Tree&#39;: {1: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 3: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 7: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 14: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 21: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 30: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 60: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 90: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 180: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 365: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}}, &#39;Random Forest&#39;: {1: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 3: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 7: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 14: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 21: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 30: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 60: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 90: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 180: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 365: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}}, &#39;Gradient Boosting&#39;: {1: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 3: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 7: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 14: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 21: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 30: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 60: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 90: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 180: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 365: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}}, &#39;K-NN&#39;: {1: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 3: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 7: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 14: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 21: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 30: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 60: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 90: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 180: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 365: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}}, &#39;Ridge&#39;: {1: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 3: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 7: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 14: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 21: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 30: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 60: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 90: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 180: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 365: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}}, &#39;Lasso&#39;: {1: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 3: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 7: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 14: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 21: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 30: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 60: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 90: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 180: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}, 365: {&#39;model&#39;: None, &#39;pred&#39;: [], &#39;test&#39;: [], &#39;cpu_time&#39;: None, &#39;MAPEs&#39;: [], &#39;R2s&#39;: [], &#39;RMSEs&#39;: []}}}
 </pre></div>
 </div>
 </div>
@@ -692,6 +670,8 @@ document.write(`
 <span class="n">path_tuning</span> <span class="o">=</span> <span class="s1">&#39;../pickle/wind/tuning_bs.pkl&#39;</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path_tuning</span><span class="p">):</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">dfWind</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Wind speed (m/s)&#39;</span><span class="p">,</span> <span class="s1">&#39;Date&#39;</span><span class="p">])</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">dfWind</span><span class="p">[</span><span class="s1">&#39;Wind speed (m/s)&#39;</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">models_dict</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tuning </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
         <span class="n">model_dict</span> <span class="o">=</span> <span class="n">models_dict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
@@ -699,15 +679,15 @@ document.write(`
             <span class="o">**</span><span class="n">model_dict</span><span class="p">[</span><span class="s1">&#39;scalers&#39;</span><span class="p">],</span>
             <span class="o">**</span><span class="n">model_dict</span><span class="p">[</span><span class="s1">&#39;grid&#39;</span><span class="p">]</span>
         <span class="p">}</span>
-        <span class="k">for</span> <span class="n">numDays</span> <span class="ow">in</span> <span class="n">number_of_days</span><span class="p">:</span>
-            <span class="n">X_train</span> <span class="o">=</span> <span class="n">dfWind</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">numDays</span><span class="o">*</span><span class="mi">24</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Wind speed (m/s)&#39;</span><span class="p">,</span> <span class="s1">&#39;Date&#39;</span><span class="p">])</span>
-            <span class="n">y_train</span> <span class="o">=</span> <span class="n">dfWind</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">numDays</span><span class="o">*</span><span class="mi">24</span><span class="p">][</span><span class="s1">&#39;Wind speed (m/s)&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">numDays</span> <span class="ow">in</span> <span class="n">model_dict</span><span class="p">[</span><span class="s1">&#39;n_days&#39;</span><span class="p">]:</span>
+            <span class="n">X_train</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">numDays</span><span class="o">*</span><span class="mi">24</span><span class="p">]</span>
+            <span class="n">y_train</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">numDays</span><span class="o">*</span><span class="mi">24</span><span class="p">]</span>
             <span class="n">steps</span> <span class="o">=</span> <span class="p">[</span>
                 <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
                 <span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">model_dict</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">]))</span>
             <span class="p">]</span>
             <span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span>
-            <span class="n">search_cv</span> <span class="o">=</span> <span class="n">BayesSearchCV</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">search_space</span><span class="o">=</span><span class="n">param_grid</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;r2&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+            <span class="n">search_cv</span> <span class="o">=</span> <span class="n">BayesSearchCV</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">search_spaces</span><span class="o">=</span><span class="n">param_grid</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;r2&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
             <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
             <span class="n">search_cv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
             <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
@@ -725,10 +705,110 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tuning SVR...
-1 days =&gt; 2.6s =&gt; {&#39;model__C&#39;: 0.01, &#39;model__epsilon&#39;: 0.001, &#39;model__kernel&#39;: &#39;poly&#39;, &#39;scaler&#39;: MinMaxScaler()}
-3 days =&gt; 3.9s =&gt; {&#39;model__C&#39;: 0.1, &#39;model__epsilon&#39;: 0.1, &#39;model__kernel&#39;: &#39;poly&#39;, &#39;scaler&#39;: MinMaxScaler()}
-7 days =&gt; 14.9s =&gt; {&#39;model__C&#39;: 10, &#39;model__epsilon&#39;: 0.01, &#39;model__kernel&#39;: &#39;linear&#39;, &#39;scaler&#39;: MinMaxScaler()}
-14 days =&gt; 80.5s =&gt; {&#39;model__C&#39;: 1, &#39;model__epsilon&#39;: 0.1, &#39;model__kernel&#39;: &#39;linear&#39;, &#39;scaler&#39;: StandardScaler()}
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 days =&gt; 6.3s =&gt; OrderedDict([(&#39;model__C&#39;, 4101.0396475227435), (&#39;model__epsilon&#39;, 7277.257459000677), (&#39;scaler&#39;, StandardScaler())])
+3 days =&gt; 4.0s =&gt; OrderedDict([(&#39;model__C&#39;, 8373.883571794007), (&#39;model__epsilon&#39;, 8833.152785477094), (&#39;scaler&#39;, MinMaxScaler())])
+7 days =&gt; 4.1s =&gt; OrderedDict([(&#39;model__C&#39;, 4101.0396475227435), (&#39;model__epsilon&#39;, 7277.257459000677), (&#39;scaler&#39;, StandardScaler())])
+14 days =&gt; 12.4s =&gt; OrderedDict([(&#39;model__C&#39;, 2687.2812625982306), (&#39;model__epsilon&#39;, 2.065284656708209), (&#39;scaler&#39;, MinMaxScaler())])
+21 days =&gt; 4.1s =&gt; OrderedDict([(&#39;model__C&#39;, 4101.0396475227435), (&#39;model__epsilon&#39;, 7277.257459000677), (&#39;scaler&#39;, StandardScaler())])
+30 days =&gt; 3.7s =&gt; OrderedDict([(&#39;model__C&#39;, 8373.883571794007), (&#39;model__epsilon&#39;, 8833.152785477094), (&#39;scaler&#39;, MinMaxScaler())])
+
+Tuning Linear Regression...
+1 days =&gt; 3.5s =&gt; OrderedDict([(&#39;scaler&#39;, None)])
+3 days =&gt; 3.4s =&gt; OrderedDict([(&#39;scaler&#39;, None)])
+7 days =&gt; 3.4s =&gt; OrderedDict([(&#39;scaler&#39;, None)])
+14 days =&gt; 3.4s =&gt; OrderedDict([(&#39;scaler&#39;, StandardScaler())])
+21 days =&gt; 3.5s =&gt; OrderedDict([(&#39;scaler&#39;, MinMaxScaler())])
+30 days =&gt; 3.5s =&gt; OrderedDict([(&#39;scaler&#39;, MinMaxScaler())])
+60 days =&gt; 3.5s =&gt; OrderedDict([(&#39;scaler&#39;, MinMaxScaler())])
+90 days =&gt; 3.7s =&gt; OrderedDict([(&#39;scaler&#39;, None)])
+180 days =&gt; 3.2s =&gt; OrderedDict([(&#39;scaler&#39;, MinMaxScaler())])
+365 days =&gt; 3.6s =&gt; OrderedDict([(&#39;scaler&#39;, MinMaxScaler())])
+
+Tuning Bayesian Ridge...
+1 days =&gt; 4.5s =&gt; OrderedDict([(&#39;model__alpha_1&#39;, 0.01), (&#39;model__alpha_2&#39;, 1e-06), (&#39;model__lambda_1&#39;, 1e-06), (&#39;model__lambda_2&#39;, 0.01), (&#39;scaler&#39;, StandardScaler())])
+3 days =&gt; 4.2s =&gt; OrderedDict([(&#39;model__alpha_1&#39;, 1e-06), (&#39;model__alpha_2&#39;, 1e-06), (&#39;model__lambda_1&#39;, 1e-06), (&#39;model__lambda_2&#39;, 1e-06), (&#39;scaler&#39;, None)])
+7 days =&gt; 4.1s =&gt; OrderedDict([(&#39;model__alpha_1&#39;, 0.00974346811709061), (&#39;model__alpha_2&#39;, 0.0073784830242188985), (&#39;model__lambda_1&#39;, 0.009839271104846514), (&#39;model__lambda_2&#39;, 2.343150659302743e-05), (&#39;scaler&#39;, StandardScaler())])
+14 days =&gt; 3.7s =&gt; OrderedDict([(&#39;model__alpha_1&#39;, 0.009743460324799277), (&#39;model__alpha_2&#39;, 0.007378475875614294), (&#39;model__lambda_1&#39;, 0.009839247097491627), (&#39;model__lambda_2&#39;, 2.3683592045501075e-05), (&#39;scaler&#39;, StandardScaler())])
+21 days =&gt; 4.1s =&gt; OrderedDict([(&#39;model__alpha_1&#39;, 0.009992449765050569), (&#39;model__alpha_2&#39;, 0.0006158312611348648), (&#39;model__lambda_1&#39;, 0.00048556711397561736), (&#39;model__lambda_2&#39;, 0.009973237297327124), (&#39;scaler&#39;, StandardScaler())])
+30 days =&gt; 3.6s =&gt; OrderedDict([(&#39;model__alpha_1&#39;, 0.009992449765050569), (&#39;model__alpha_2&#39;, 0.0006158312611348648), (&#39;model__lambda_1&#39;, 0.00048556711397561736), (&#39;model__lambda_2&#39;, 0.009973237297327124), (&#39;scaler&#39;, StandardScaler())])
+60 days =&gt; 3.9s =&gt; OrderedDict([(&#39;model__alpha_1&#39;, 0.009992449765050569), (&#39;model__alpha_2&#39;, 0.0006158312611348648), (&#39;model__lambda_1&#39;, 0.00048556711397561736), (&#39;model__lambda_2&#39;, 0.009973237297327124), (&#39;scaler&#39;, StandardScaler())])
+90 days =&gt; 3.7s =&gt; OrderedDict([(&#39;model__alpha_1&#39;, 0.009252503017164676), (&#39;model__alpha_2&#39;, 0.007323683925920016), (&#39;model__lambda_1&#39;, 0.009959053410975544), (&#39;model__lambda_2&#39;, 0.00993984668975188), (&#39;scaler&#39;, None)])
+180 days =&gt; 3.7s =&gt; OrderedDict([(&#39;model__alpha_1&#39;, 0.007039822192143179), (&#39;model__alpha_2&#39;, 0.0026753515950191245), (&#39;model__lambda_1&#39;, 0.008843633285849486), (&#39;model__lambda_2&#39;, 0.0018800384170421186), (&#39;scaler&#39;, MinMaxScaler())])
+365 days =&gt; 3.8s =&gt; OrderedDict([(&#39;model__alpha_1&#39;, 0.004101629484574286), (&#39;model__alpha_2&#39;, 0.007277529706030074), (&#39;model__lambda_1&#39;, 0.009328747120479491), (&#39;model__lambda_2&#39;, 0.0031586801352770006), (&#39;scaler&#39;, StandardScaler())])
+
+Tuning Decision Tree...
+1 days =&gt; 4.3s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 3), (&#39;scaler&#39;, None)])
+3 days =&gt; 4.0s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 3), (&#39;scaler&#39;, None)])
+7 days =&gt; 4.1s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 3), (&#39;scaler&#39;, None)])
+14 days =&gt; 3.6s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 4), (&#39;scaler&#39;, None)])
+21 days =&gt; 4.3s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 3), (&#39;scaler&#39;, None)])
+30 days =&gt; 3.4s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 4), (&#39;scaler&#39;, None)])
+60 days =&gt; 3.4s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 4), (&#39;scaler&#39;, None)])
+90 days =&gt; 3.3s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 6), (&#39;scaler&#39;, None)])
+180 days =&gt; 3.9s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 6), (&#39;scaler&#39;, None)])
+365 days =&gt; 3.7s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 6), (&#39;scaler&#39;, None)])
+
+Tuning Random Forest...
+1 days =&gt; 5.6s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 7), (&#39;model__n_estimators&#39;, 200), (&#39;scaler&#39;, None)])
+3 days =&gt; 5.5s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 4), (&#39;model__n_estimators&#39;, 200), (&#39;scaler&#39;, None)])
+7 days =&gt; 5.8s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 7), (&#39;model__n_estimators&#39;, 53), (&#39;scaler&#39;, None)])
+14 days =&gt; 6.0s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 5), (&#39;model__n_estimators&#39;, 88), (&#39;scaler&#39;, None)])
+21 days =&gt; 6.5s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 3), (&#39;model__n_estimators&#39;, 200), (&#39;scaler&#39;, None)])
+30 days =&gt; 6.7s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 4), (&#39;model__n_estimators&#39;, 10), (&#39;scaler&#39;, None)])
+60 days =&gt; 7.5s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 7), (&#39;model__n_estimators&#39;, 159), (&#39;scaler&#39;, None)])
+90 days =&gt; 7.2s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 6), (&#39;model__n_estimators&#39;, 10), (&#39;scaler&#39;, None)])
+180 days =&gt; 10.1s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 7), (&#39;model__n_estimators&#39;, 200), (&#39;scaler&#39;, None)])
+365 days =&gt; 14.3s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 7), (&#39;model__n_estimators&#39;, 200), (&#39;scaler&#39;, None)])
+
+Tuning Gradient Boosting...
+1 days =&gt; 6.0s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 2), (&#39;model__n_estimators&#39;, 164), (&#39;scaler&#39;, None)])
+3 days =&gt; 4.7s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 1), (&#39;model__n_estimators&#39;, 83), (&#39;scaler&#39;, None)])
+7 days =&gt; 5.3s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 1), (&#39;model__n_estimators&#39;, 117), (&#39;scaler&#39;, None)])
+14 days =&gt; 5.7s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 1), (&#39;model__n_estimators&#39;, 130), (&#39;scaler&#39;, None)])
+21 days =&gt; 5.9s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 1), (&#39;model__n_estimators&#39;, 133), (&#39;scaler&#39;, None)])
+30 days =&gt; 6.0s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 2), (&#39;model__n_estimators&#39;, 124), (&#39;scaler&#39;, None)])
+60 days =&gt; 6.4s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 3), (&#39;model__n_estimators&#39;, 79), (&#39;scaler&#39;, None)])
+90 days =&gt; 7.8s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 2), (&#39;model__n_estimators&#39;, 175), (&#39;scaler&#39;, None)])
+180 days =&gt; 9.9s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 3), (&#39;model__n_estimators&#39;, 99), (&#39;scaler&#39;, None)])
+365 days =&gt; 15.3s =&gt; OrderedDict([(&#39;model__max_depth&#39;, 4), (&#39;model__n_estimators&#39;, 66), (&#39;scaler&#39;, None)])
+
+Tuning K-NN...
+1 days =&gt; 5.5s =&gt; OrderedDict([(&#39;model__n_neighbors&#39;, 1), (&#39;scaler&#39;, None)])
+3 days =&gt; 5.7s =&gt; OrderedDict([(&#39;model__n_neighbors&#39;, 7), (&#39;scaler&#39;, StandardScaler())])
+7 days =&gt; 5.5s =&gt; OrderedDict([(&#39;model__n_neighbors&#39;, 5), (&#39;scaler&#39;, StandardScaler())])
+14 days =&gt; 5.4s =&gt; OrderedDict([(&#39;model__n_neighbors&#39;, 17), (&#39;scaler&#39;, StandardScaler())])
+21 days =&gt; 6.2s =&gt; OrderedDict([(&#39;model__n_neighbors&#39;, 7), (&#39;scaler&#39;, None)])
+30 days =&gt; 5.6s =&gt; OrderedDict([(&#39;model__n_neighbors&#39;, 7), (&#39;scaler&#39;, None)])
+60 days =&gt; 4.8s =&gt; OrderedDict([(&#39;model__n_neighbors&#39;, 16), (&#39;scaler&#39;, None)])
+90 days =&gt; 5.5s =&gt; OrderedDict([(&#39;model__n_neighbors&#39;, 16), (&#39;scaler&#39;, None)])
+180 days =&gt; 6.3s =&gt; OrderedDict([(&#39;model__n_neighbors&#39;, 18), (&#39;scaler&#39;, None)])
+365 days =&gt; 5.5s =&gt; OrderedDict([(&#39;model__n_neighbors&#39;, 20), (&#39;scaler&#39;, None)])
+
+Tuning Ridge...
+1 days =&gt; 4.3s =&gt; OrderedDict([(&#39;model__alpha&#39;, 0.0001), (&#39;scaler&#39;, None)])
+3 days =&gt; 4.4s =&gt; OrderedDict([(&#39;model__alpha&#39;, 0.0001), (&#39;scaler&#39;, None)])
+7 days =&gt; 5.0s =&gt; OrderedDict([(&#39;model__alpha&#39;, 0.0001), (&#39;scaler&#39;, None)])
+14 days =&gt; 5.0s =&gt; OrderedDict([(&#39;model__alpha&#39;, 0.0001), (&#39;scaler&#39;, MinMaxScaler())])
+21 days =&gt; 5.1s =&gt; OrderedDict([(&#39;model__alpha&#39;, 0.0001), (&#39;scaler&#39;, None)])
+30 days =&gt; 5.4s =&gt; OrderedDict([(&#39;model__alpha&#39;, 0.0001), (&#39;scaler&#39;, StandardScaler())])
+60 days =&gt; 5.8s =&gt; OrderedDict([(&#39;model__alpha&#39;, 0.0001), (&#39;scaler&#39;, StandardScaler())])
+90 days =&gt; 5.7s =&gt; OrderedDict([(&#39;model__alpha&#39;, 0.0001), (&#39;scaler&#39;, None)])
+180 days =&gt; 5.3s =&gt; OrderedDict([(&#39;model__alpha&#39;, 0.0001), (&#39;scaler&#39;, None)])
+365 days =&gt; 5.0s =&gt; OrderedDict([(&#39;model__alpha&#39;, 0.0001), (&#39;scaler&#39;, None)])
+
+Tuning Lasso...
+1 days =&gt; 3.2s =&gt; OrderedDict([(&#39;model__alpha&#39;, 0.0001), (&#39;scaler&#39;, MinMaxScaler())])
+3 days =&gt; 3.3s =&gt; OrderedDict([(&#39;model__alpha&#39;, 0.0001), (&#39;scaler&#39;, MinMaxScaler())])
+7 days =&gt; 3.4s =&gt; OrderedDict([(&#39;model__alpha&#39;, 0.0001), (&#39;scaler&#39;, MinMaxScaler())])
+14 days =&gt; 3.6s =&gt; OrderedDict([(&#39;model__alpha&#39;, 0.0001), (&#39;scaler&#39;, MinMaxScaler())])
+21 days =&gt; 3.4s =&gt; OrderedDict([(&#39;model__alpha&#39;, 0.0001), (&#39;scaler&#39;, MinMaxScaler())])
+30 days =&gt; 3.3s =&gt; OrderedDict([(&#39;model__alpha&#39;, 0.0001), (&#39;scaler&#39;, MinMaxScaler())])
+60 days =&gt; 3.7s =&gt; OrderedDict([(&#39;model__alpha&#39;, 0.0001), (&#39;scaler&#39;, MinMaxScaler())])
+90 days =&gt; 3.6s =&gt; OrderedDict([(&#39;model__alpha&#39;, 0.0001), (&#39;scaler&#39;, MinMaxScaler())])
+180 days =&gt; 3.5s =&gt; OrderedDict([(&#39;model__alpha&#39;, 0.0001), (&#39;scaler&#39;, MinMaxScaler())])
+365 days =&gt; 3.8s =&gt; OrderedDict([(&#39;model__alpha&#39;, 0.0001), (&#39;scaler&#39;, MinMaxScaler())])
 </pre></div>
 </div>
 </div>
@@ -754,7 +834,7 @@ document.write(`
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">models_dict</span><span class="p">):</span>
         <span class="n">model_dict</span> <span class="o">=</span> <span class="n">models_dict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">numDays</span> <span class="ow">in</span> <span class="n">number_of_days</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">numDays</span> <span class="ow">in</span> <span class="n">model_dict</span><span class="p">[</span><span class="s1">&#39;n_days&#39;</span><span class="p">]:</span>
             <span class="n">best_params_cleaned</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;model__&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">):</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">model_dict</span><span class="p">[</span><span class="s1">&#39;best_params&#39;</span><span class="p">][</span><span class="n">numDays</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;model__&#39;</span><span class="p">)}</span>
             <span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span>
                 <span class="p">[</span>
@@ -793,6 +873,116 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training SVR...
+1 days
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> =&gt; 10.0s
+3 days =&gt; 9.9s
+7 days =&gt; 10.1s
+14 days =&gt; 10.5s
+21 days =&gt; 10.2s
+30 days =&gt; 10.0s
+
+Training Linear Regression...
+1 days =&gt; 7.3s
+3 days =&gt; 7.3s
+7 days =&gt; 7.3s
+14 days =&gt; 9.9s
+21 days =&gt; 9.7s
+30 days =&gt; 9.8s
+60 days =&gt; 9.8s
+90 days =&gt; 7.4s
+180 days =&gt; 10.0s
+365 days =&gt; 10.1s
+
+Training Bayesian Ridge...
+1 days =&gt; 10.6s
+3 days =&gt; 8.2s
+7 days =&gt; 10.5s
+14 days =&gt; 10.6s
+21 days =&gt; 10.6s
+30 days =&gt; 10.6s
+60 days =&gt; 10.7s
+90 days =&gt; 8.2s
+180 days =&gt; 11.0s
+365 days =&gt; 11.4s
+
+Training Decision Tree...
+1 days =&gt; 7.7s
+3 days =&gt; 7.8s
+7 days =&gt; 8.1s
+14 days =&gt; 8.6s
+21 days =&gt; 8.7s
+30 days =&gt; 9.6s
+60 days =&gt; 11.2s
+90 days =&gt; 15.2s
+180 days =&gt; 21.2s
+365 days =&gt; 32.1s
+
+Training Random Forest...
+1 days =&gt; 342.0s
+3 days =&gt; 366.7s
+7 days =&gt; 131.6s
+14 days =&gt; 231.8s
+21 days =&gt; 480.0s
+30 days =&gt; 39.0s
+60 days =&gt; 960.6s
+90 days =&gt; 77.6s
+180 days =&gt; 2581.3s
+365 days =&gt; 4314.0s
+
+Training Gradient Boosting...
+1 days =&gt; 138.2s
+3 days =&gt; 76.1s
+7 days =&gt; 114.1s
+14 days =&gt; 141.8s
+21 days =&gt; 159.4s
+30 days =&gt; 223.7s
+60 days =&gt; 273.4s
+90 days =&gt; 572.1s
+180 days =&gt; 754.9s
+365 days =&gt; 1168.4s
+
+Training K-NN...
+1 days =&gt; 74.5s
+3 days =&gt; 78.5s
+7 days =&gt; 78.2s
+14 days =&gt; 78.8s
+21 days =&gt; 74.3s
+30 days =&gt; 74.4s
+60 days =&gt; 74.9s
+90 days =&gt; 76.1s
+180 days =&gt; 77.9s
+365 days =&gt; 77.7s
+
+Training Ridge...
+1 days =&gt; 7.5s
+3 days =&gt; 7.5s
+7 days =&gt; 7.5s
+14 days =&gt; 10.0s
+21 days =&gt; 7.5s
+30 days =&gt; 10.2s
+60 days =&gt; 10.2s
+90 days =&gt; 7.5s
+180 days =&gt; 7.5s
+365 days =&gt; 7.4s
+
+Training Lasso...
+1 days =&gt; 10.4s
+3 days =&gt; 10.4s
+7 days =&gt; 10.5s
+14 days =&gt; 10.5s
+21 days =&gt; 10.5s
+30 days =&gt; 10.6s
+60 days =&gt; 10.6s
+90 days =&gt; 15.2s
+180 days =&gt; 15.4s
+365 days =&gt; 15.3s
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="results">
@@ -826,34 +1016,93 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                     Model  CPU time         MAPE     R2    RMSE
-Gradient Boosting (3 days)     193.2 3.820000e-01  0.580   0.739
-    Random Forest (3 days)      34.5 5.642482e+11  0.574   0.737
-    Random Forest (2 days)     115.0 9.984037e+09  0.501   0.764
-    Decision Tree (3 days)       9.2 3.660706e+13  0.499   0.871
-    Decision Tree (2 days)       8.8 7.570750e+13  0.431   0.950
-   Bayesian Ridge (3 days)      12.0 4.420000e-01  0.415   1.179
-            Ridge (3 days)      10.1 6.820000e-01  0.410   1.194
-            Lasso (3 days)      10.9 4.080000e-01  0.385   1.281
-Gradient Boosting (1 days)     165.7 5.600000e-01  0.353   0.909
-Linear Regression (3 days)       8.0 5.430000e-01  0.313   1.527
-    Random Forest (1 days)     189.6 3.360000e-01  0.264   0.891
-            Lasso (2 days)      11.1 8.780000e-01  0.245   1.803
-   Bayesian Ridge (2 days)      11.9 5.520000e-01  0.243   1.724
-            Ridge (2 days)      10.3 6.790000e-01  0.223   1.917
-Linear Regression (2 days)      10.5 7.560000e-01  0.215   1.970
-              SVR (2 days)      13.4 6.300000e-01  0.211   1.955
-            Lasso (1 days)      10.6 6.080000e-01  0.194   1.947
-   Bayesian Ridge (1 days)      12.1 3.349000e+00  0.161   2.061
-             K-NN (3 days)      78.1 5.492682e+11  0.155   0.962
-Linear Regression (1 days)      10.5 1.812000e+00  0.123   2.672
-    Decision Tree (1 days)       8.2 1.008120e+12  0.082   1.060
-              SVR (3 days)      12.3 4.230000e-01 -0.000  72.985
-              SVR (1 days)      11.3 5.360000e-01 -0.000 836.514
-Gradient Boosting (2 days)      18.0 3.200000e-01 -0.434   0.951
-             K-NN (2 days)      77.7 4.030000e-01 -0.517   1.083
-             K-NN (1 days)      10.4 4.310000e-01 -0.522   1.115
-            Ridge (1 days)      10.0 4.400000e-01 -1.563   1.250
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                       Model  CPU time         MAPE      R2  RMSE
+Gradient Boosting (365 days)    1168.4 2.250000e-01   0.765 0.567
+    Random Forest (365 days)    4314.0 2.380000e-01   0.760 0.574
+Gradient Boosting (180 days)     754.9 2.350000e-01   0.755 0.580
+ Gradient Boosting (90 days)     572.1 2.430000e-01   0.754 0.583
+    Random Forest (180 days)    2581.3 2.460000e-01   0.751 0.585
+ Gradient Boosting (60 days)     273.4 2.390000e-01   0.747 0.587
+     Random Forest (60 days)     960.6 2.450000e-01   0.746 0.592
+     Random Forest (90 days)      77.6 2.044674e+10   0.742 0.596
+ Gradient Boosting (30 days)     223.7 2.590000e-01   0.739 0.597
+    Decision Tree (365 days)      32.1 4.199470e+11   0.739 0.602
+             K-NN (365 days)      77.7 2.260000e-01   0.732 0.596
+   Bayesian Ridge (365 days)      11.4 2.520000e-01   0.726 0.608
+            Ridge (365 days)       7.4 2.490000e-01   0.726 0.608
+             Ridge (90 days)       7.5 3.340000e-01   0.726 0.611
+             Ridge (21 days)       7.5 2.990000e-01   0.726 0.614
+Linear Regression (365 days)      10.1 2.510000e-01   0.726 0.608
+            Lasso (365 days)      15.3 2.490000e-01   0.725 0.608
+    Decision Tree (180 days)      21.2 1.613968e+12   0.721 0.625
+   Bayesian Ridge (180 days)      11.0 2.970000e-01   0.720 0.615
+            Lasso (180 days)      15.4 2.990000e-01   0.720 0.615
+Linear Regression (180 days)      10.0 2.810000e-01   0.720 0.615
+            Ridge (180 days)       7.5 2.990000e-01   0.720 0.615
+             Ridge (30 days)      10.2 2.870000e-01   0.718 0.627
+             Lasso (30 days)      10.6 2.790000e-01   0.718 0.625
+ Linear Regression (30 days)       9.8 2.870000e-01   0.718 0.627
+    Bayesian Ridge (30 days)      10.6 2.810000e-01   0.717 0.627
+              Ridge (7 days)       7.5 3.240000e-01   0.717 0.632
+             Lasso (21 days)      10.5 2.960000e-01   0.715 0.632
+     Random Forest (30 days)      39.0 2.450000e-01   0.715 0.614
+     Random Forest (14 days)     231.8 2.570000e-01   0.714 0.619
+     Decision Tree (90 days)      15.2 5.105722e+12   0.714 0.642
+ Linear Regression (21 days)       9.7 2.930000e-01   0.714 0.633
+    Bayesian Ridge (90 days)       8.2 2.570000e-01   0.713 0.621
+    Bayesian Ridge (21 days)      10.6 2.860000e-01   0.713 0.633
+             K-NN (180 days)      77.9 2.320000e-01   0.713 0.609
+ Gradient Boosting (21 days)     159.4 2.480000e-01   0.709 0.608
+              K-NN (90 days)      76.1 2.320000e-01   0.704 0.614
+             Lasso (90 days)      15.2 2.710000e-01   0.704 0.643
+             Lasso (60 days)      10.6 2.640000e-01   0.701 0.650
+     Decision Tree (60 days)      11.2 7.605376e+10   0.700 0.640
+ Gradient Boosting (14 days)     141.8 2.530000e-01   0.700 0.618
+ Linear Regression (60 days)       9.8 2.740000e-01   0.694 0.661
+             Ridge (60 days)      10.2 2.740000e-01   0.694 0.661
+ Linear Regression (90 days)       7.4 3.310000e-01   0.694 0.659
+     Bayesian Ridge (3 days)       8.2 3.290000e-01   0.693 0.652
+    Bayesian Ridge (60 days)      10.7 3.350000e-01   0.693 0.661
+              K-NN (60 days)      74.9 2.320000e-01   0.692 0.618
+              Ridge (3 days)       7.5 3.820000e-01   0.691 0.682
+     Decision Tree (30 days)       9.6 1.498786e+12   0.686 0.659
+      Random Forest (7 days)     131.6 5.498534e+10   0.685 0.653
+     Random Forest (21 days)     480.0 2.420000e-01   0.683 0.631
+              K-NN (30 days)      74.4 2.470000e-01   0.676 0.642
+  Gradient Boosting (7 days)     114.1 2.780000e-01   0.670 0.644
+     Decision Tree (14 days)       8.6 5.989575e+12   0.661 0.694
+             Lasso (14 days)      10.5 3.600000e-01   0.660 0.720
+ Linear Regression (14 days)       9.9 1.048000e+00   0.657 0.725
+             Ridge (14 days)      10.0 6.140000e-01   0.657 0.725
+    Bayesian Ridge (14 days)      10.6 3.370000e-01   0.655 0.725
+              K-NN (21 days)      74.3 2.500000e-01   0.654 0.653
+     Decision Tree (21 days)       8.7 1.404866e+11   0.649 0.681
+      Random Forest (3 days)     366.7 2.780000e-01   0.613 0.693
+      Decision Tree (7 days)       8.1 3.189150e+12   0.610 0.727
+  Gradient Boosting (3 days)      76.1 4.360000e-01   0.587 0.704
+      Decision Tree (3 days)       7.8 1.492121e+13   0.539 0.806
+               K-NN (7 days)      78.2 1.499600e+11   0.526 0.753
+              Ridge (1 days)       7.5 5.670000e-01   0.524 0.994
+              K-NN (14 days)      78.8 2.650000e-01   0.518 0.705
+              Lasso (7 days)      10.5 3.140000e-01   0.451 1.104
+  Linear Regression (7 days)       7.3 3.240000e-01   0.447 1.113
+     Bayesian Ridge (7 days)      10.5 3.100000e-01   0.445 1.105
+  Gradient Boosting (1 days)     138.2 5.250000e-01   0.424 0.870
+      Random Forest (1 days)     342.0 3.200000e-01   0.387 0.833
+              Lasso (3 days)      10.4 4.370000e-01   0.369 1.336
+  Linear Regression (3 days)       7.3 4.530000e-01   0.367 1.343
+      Decision Tree (1 days)       7.7 3.759488e+13   0.359 0.975
+               K-NN (3 days)      78.5 1.298270e+11   0.346 0.835
+               K-NN (1 days)      74.5 8.437030e+13   0.236 1.077
+              Lasso (1 days)      10.4 6.900000e-01   0.162 2.394
+     Bayesian Ridge (1 days)      10.6 5.210000e-01   0.162 2.209
+  Linear Regression (1 days)       7.3 8.340000e-01   0.162 2.400
+               SVR (14 days)      10.5 3.150000e-01  -1.677 0.999
+                SVR (1 days)      10.0 4.150000e-01  -1.743 1.312
+                SVR (3 days)       9.9 4.040000e-01  -3.865 1.382
+                SVR (7 days)      10.1 3.950000e-01  -7.703 1.450
+               SVR (21 days)      10.2 3.950000e-01 -13.478 1.605
+               SVR (30 days)      10.0 3.980000e-01 -15.271 1.667
 </pre></div>
 </div>
 </div>
@@ -884,7 +1133,7 @@ Gradient Boosting (2 days)      18.0 3.200000e-01 -0.434   0.951
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/dc4b4ef4c588207e5868b3fc8550c81338e2bbe57fb14f861da1086840af52e1.png" src="_images/dc4b4ef4c588207e5868b3fc8550c81338e2bbe57fb14f861da1086840af52e1.png" />
+<img alt="_images/222179714af5260bf1dbee9c8ed3446b80b0c5a01f69e4e9041a72fdf4042842.png" src="_images/222179714af5260bf1dbee9c8ed3446b80b0c5a01f69e4e9041a72fdf4042842.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -916,7 +1165,7 @@ Gradient Boosting (2 days)      18.0 3.200000e-01 -0.434   0.951
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/573cc24a8c0d9e3efb623fbfcb40f2349a18380089b2a76e57d78a940f19088d.png" src="_images/573cc24a8c0d9e3efb623fbfcb40f2349a18380089b2a76e57d78a940f19088d.png" />
+<img alt="_images/08b268cdf8377a423e9719ede7fe77af0384a76a37ef00d40ca45117ded6f688.png" src="_images/08b268cdf8377a423e9719ede7fe77af0384a76a37ef00d40ca45117ded6f688.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -951,34 +1200,93 @@ Gradient Boosting (2 days)      18.0 3.200000e-01 -0.434   0.951
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                     Model  Mean    Std  p_value
-Gradient Boosting (3 days) -0.02   0.74      0.0
-    Random Forest (3 days) -0.01   0.74      0.0
-    Random Forest (2 days) -0.01   0.76      0.0
-    Decision Tree (3 days) -0.03   0.87      0.0
-    Random Forest (1 days)  0.00   0.89      0.0
-Gradient Boosting (1 days) -0.00   0.91      0.0
-Gradient Boosting (2 days) -0.01   0.95      0.0
-    Decision Tree (2 days) -0.02   0.95      0.0
-             K-NN (3 days) -0.02   0.96      0.0
-    Decision Tree (1 days) -0.00   1.06      0.0
-             K-NN (2 days) -0.06   1.08      0.0
-             K-NN (1 days) -0.09   1.11      0.0
-   Bayesian Ridge (3 days) -0.05   1.18      0.0
-            Ridge (3 days) -0.05   1.19      0.0
-            Ridge (1 days) -0.00   1.25      0.0
-            Lasso (3 days) -0.04   1.28      0.0
-Linear Regression (3 days) -0.04   1.53      0.0
-   Bayesian Ridge (2 days) -0.05   1.72      0.0
-            Lasso (2 days) -0.05   1.80      0.0
-            Ridge (2 days) -0.05   1.92      0.0
-            Lasso (1 days) -0.06   1.95      0.0
-              SVR (2 days) -0.03   1.96      0.0
-Linear Regression (2 days) -0.05   1.97      0.0
-   Bayesian Ridge (1 days) -0.07   2.06      0.0
-Linear Regression (1 days) -0.07   2.67      0.0
-              SVR (3 days) -0.30  72.98      0.0
-              SVR (1 days) -2.81 836.51      0.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                       Model  Mean  Std  p_value
+    Random Forest (365 days)  0.00 0.57      0.0
+Gradient Boosting (365 days)  0.00 0.57      0.0
+ Gradient Boosting (90 days) -0.01 0.58      0.0
+    Random Forest (180 days) -0.01 0.58      0.0
+Gradient Boosting (180 days) -0.01 0.58      0.0
+ Gradient Boosting (60 days) -0.02 0.59      0.0
+     Random Forest (60 days) -0.02 0.59      0.0
+             K-NN (365 days)  0.02 0.60      0.0
+    Decision Tree (365 days)  0.00 0.60      0.0
+ Gradient Boosting (30 days) -0.02 0.60      0.0
+     Random Forest (90 days) -0.01 0.60      0.0
+              K-NN (90 days)  0.00 0.61      0.0
+             Ridge (21 days) -0.02 0.61      0.0
+             Ridge (90 days) -0.01 0.61      0.0
+ Gradient Boosting (21 days) -0.02 0.61      0.0
+            Ridge (180 days) -0.01 0.61      0.0
+            Ridge (365 days)  0.01 0.61      0.0
+            Lasso (180 days) -0.01 0.61      0.0
+     Random Forest (30 days) -0.01 0.61      0.0
+             K-NN (180 days)  0.00 0.61      0.0
+   Bayesian Ridge (365 days)  0.01 0.61      0.0
+            Lasso (365 days)  0.01 0.61      0.0
+Linear Regression (365 days)  0.01 0.61      0.0
+ Gradient Boosting (14 days) -0.02 0.62      0.0
+    Bayesian Ridge (90 days) -0.01 0.62      0.0
+   Bayesian Ridge (180 days) -0.01 0.62      0.0
+Linear Regression (180 days) -0.01 0.62      0.0
+     Random Forest (14 days) -0.02 0.62      0.0
+              K-NN (60 days)  0.00 0.62      0.0
+    Decision Tree (180 days) -0.01 0.62      0.0
+ Linear Regression (30 days) -0.02 0.63      0.0
+    Bayesian Ridge (30 days) -0.02 0.63      0.0
+     Random Forest (21 days) -0.01 0.63      0.0
+ Linear Regression (21 days) -0.02 0.63      0.0
+             Ridge (30 days) -0.02 0.63      0.0
+             Lasso (21 days) -0.02 0.63      0.0
+             Lasso (30 days) -0.02 0.63      0.0
+    Bayesian Ridge (21 days) -0.02 0.63      0.0
+              Ridge (7 days) -0.02 0.63      0.0
+     Decision Tree (60 days) -0.01 0.64      0.0
+  Gradient Boosting (7 days) -0.03 0.64      0.0
+              K-NN (30 days) -0.00 0.64      0.0
+             Lasso (90 days) -0.02 0.64      0.0
+     Decision Tree (90 days) -0.02 0.64      0.0
+      Random Forest (7 days) -0.03 0.65      0.0
+              K-NN (21 days) -0.00 0.65      0.0
+     Bayesian Ridge (3 days) -0.04 0.65      0.0
+             Lasso (60 days) -0.02 0.65      0.0
+             Ridge (60 days) -0.02 0.66      0.0
+ Linear Regression (60 days) -0.02 0.66      0.0
+    Bayesian Ridge (60 days) -0.02 0.66      0.0
+     Decision Tree (30 days) -0.01 0.66      0.0
+ Linear Regression (90 days) -0.02 0.66      0.0
+     Decision Tree (21 days) -0.01 0.68      0.0
+              Ridge (3 days) -0.04 0.68      0.0
+     Decision Tree (14 days) -0.02 0.69      0.0
+      Random Forest (3 days) -0.02 0.69      0.0
+  Gradient Boosting (3 days) -0.03 0.70      0.0
+              K-NN (14 days) -0.02 0.71      0.0
+             Lasso (14 days) -0.02 0.72      0.0
+             Ridge (14 days) -0.02 0.72      0.0
+    Bayesian Ridge (14 days) -0.02 0.72      0.0
+ Linear Regression (14 days) -0.02 0.72      0.0
+      Decision Tree (7 days) -0.02 0.73      0.0
+               K-NN (7 days) -0.03 0.75      0.0
+      Decision Tree (3 days) -0.03 0.81      0.0
+      Random Forest (1 days) -0.00 0.83      0.0
+               K-NN (3 days) -0.02 0.83      0.0
+  Gradient Boosting (1 days) -0.01 0.87      0.0
+               SVR (14 days)  0.26 0.96      0.0
+      Decision Tree (1 days) -0.01 0.98      0.0
+              Ridge (1 days) -0.06 0.99      0.0
+               K-NN (1 days) -0.02 1.08      0.0
+     Bayesian Ridge (7 days) -0.04 1.10      0.0
+              Lasso (7 days) -0.04 1.10      0.0
+  Linear Regression (7 days) -0.04 1.11      0.0
+                SVR (1 days)  0.22 1.29      0.0
+                SVR (3 days)  0.36 1.34      0.0
+              Lasso (3 days) -0.05 1.34      0.0
+  Linear Regression (3 days) -0.05 1.34      0.0
+               SVR (21 days)  0.86 1.35      0.0
+                SVR (7 days)  0.54 1.35      0.0
+               SVR (30 days)  0.97 1.35      0.0
+     Bayesian Ridge (1 days) -0.08 2.21      0.0
+              Lasso (1 days) -0.08 2.39      0.0
+  Linear Regression (1 days) -0.08 2.40      0.0
 </pre></div>
 </div>
 </div>
@@ -990,19 +1298,6 @@ Linear Regression (1 days) -0.07   2.67      0.0
 
 <span class="n">y_test</span> <span class="o">=</span> <span class="n">results_dict</span><span class="p">[</span><span class="n">best_model</span><span class="p">][</span><span class="n">best_nb_days</span><span class="p">][</span><span class="s1">&#39;test&#39;</span><span class="p">]</span>
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">results_dict</span><span class="p">[</span><span class="n">best_model</span><span class="p">][</span><span class="n">best_nb_days</span><span class="p">][</span><span class="s1">&#39;pred&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">best_model</span> <span class="o">=</span> <span class="s1">&#39;Decision Tree&#39;</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">best_nb_days</span> <span class="o">=</span> <span class="mi">7</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">results_dict</span><span class="p">[</span><span class="n">best_model</span><span class="p">][</span><span class="n">best_nb_days</span><span class="p">][</span><span class="s1">&#39;test&#39;</span><span class="p">]</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">results_dict</span><span class="p">[</span><span class="n">best_model</span><span class="p">][</span><span class="n">best_nb_days</span><span class="p">][</span><span class="s1">&#39;pred&#39;</span><span class="p">]</span>
-
-<span class="ne">KeyError</span>: 7
 </pre></div>
 </div>
 </div>
