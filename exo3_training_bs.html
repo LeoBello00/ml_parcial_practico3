@@ -535,16 +535,16 @@ Test
         <span class="p">},</span>
     <span class="p">},</span>
 
-    <span class="p">{</span>
-        <span class="s1">&#39;name_clf&#39;</span> <span class="p">:</span> <span class="s1">&#39;SVC (linear)&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">SVC</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">),</span>
-        <span class="s1">&#39;scalers&#39;</span> <span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;scaler&#39;</span><span class="p">:</span> <span class="n">Categorical</span><span class="p">([</span><span class="n">MinMaxScaler</span><span class="p">(),</span> <span class="n">StandardScaler</span><span class="p">()]),</span>
-        <span class="p">},</span>
-        <span class="s1">&#39;grid&#39;</span> <span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;model__C&#39;</span><span class="p">:</span> <span class="n">Real</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span> <span class="mi">1000</span><span class="p">),</span>
-        <span class="p">},</span>
-    <span class="p">},</span>
+    <span class="c1"># {</span>
+    <span class="c1">#     &#39;name_clf&#39; : &#39;SVC (linear)&#39;,</span>
+    <span class="c1">#     &#39;model&#39;: SVC(random_state=42, kernel=&#39;linear&#39;),</span>
+    <span class="c1">#     &#39;scalers&#39; : {</span>
+    <span class="c1">#         &#39;scaler&#39;: Categorical([MinMaxScaler(), StandardScaler()]),</span>
+    <span class="c1">#     },</span>
+    <span class="c1">#     &#39;grid&#39; : {</span>
+    <span class="c1">#         &#39;model__C&#39;: Real(0.001, 1000),</span>
+    <span class="c1">#     },</span>
+    <span class="c1"># },</span>
 
     <span class="p">{</span>
         <span class="s1">&#39;name_clf&#39;</span> <span class="p">:</span> <span class="s1">&#39;SVC (rbf)&#39;</span><span class="p">,</span>
@@ -639,13 +639,16 @@ Test
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best params Random Forest: 
-OrderedDict([(&#39;model__max_depth&#39;, 21), (&#39;model__n_estimators&#39;, 200), (&#39;scaler&#39;, None)])
+OrderedDict([(&#39;model__max_depth&#39;, 24), (&#39;model__n_estimators&#39;, 185), (&#39;scaler&#39;, None)])
+
+Best params SVC (poly): 
+OrderedDict([(&#39;model__C&#39;, 799.5536420537316), (&#39;scaler&#39;, MinMaxScaler())])
 
 Best params SVC (rbf): 
-OrderedDict([(&#39;model__C&#39;, 78.62878302619048), (&#39;scaler&#39;, StandardScaler())])
+OrderedDict([(&#39;model__C&#39;, 3.6313036244359718), (&#39;scaler&#39;, StandardScaler())])
 
 Best params SVC (sigmoid): 
-OrderedDict([(&#39;model__C&#39;, 0.04745226486541268), (&#39;scaler&#39;, StandardScaler())])
+OrderedDict([(&#39;model__C&#39;, 3.6313036244359718), (&#39;scaler&#39;, StandardScaler())])
 </pre></div>
 </div>
 </div>
@@ -659,9 +662,10 @@ OrderedDict([(&#39;model__C&#39;, 0.04745226486541268), (&#39;scaler&#39;, Stand
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        Model  CPU time  Accuracy  Precision  Recall  f1-score   AUC
-Random Forest    2067.2     0.963      0.496   0.992     0.661 0.977
-    SVC (rbf)    1112.5     0.963      0.495   0.951     0.651 0.957
-SVC (sigmoid)     828.8     0.807      0.122   0.711     0.209 0.760
+Random Forest      61.5     0.963      0.490   0.991     0.656 0.976
+   SVC (poly)    7241.5     0.961      0.480   0.955     0.638 0.958
+    SVC (rbf)     492.4     0.963      0.492   0.950     0.649 0.957
+SVC (sigmoid)     310.0     0.735      0.093   0.725     0.164 0.730
 </pre></div>
 </div>
 </div>
@@ -686,7 +690,7 @@ SVC (sigmoid)     828.8     0.807      0.122   0.711     0.209 0.760
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/882c7a28d7398b2400cfa2cdc5214bc2f8b4a6ad590e0423bfdd8072fc11e955.png" src="_images/882c7a28d7398b2400cfa2cdc5214bc2f8b4a6ad590e0423bfdd8072fc11e955.png" />
+<img alt="_images/5bfd91dc51c0532201bdb51c19f0acadf3e64854b704e6d351a20b8c49586383.png" src="_images/5bfd91dc51c0532201bdb51c19f0acadf3e64854b704e6d351a20b8c49586383.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -708,7 +712,7 @@ SVC (sigmoid)     828.8     0.807      0.122   0.711     0.209 0.760
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c32fb377792a078d5a9bedabf6e378a848070fef7db0e19c589b4333e4852430.png" src="_images/c32fb377792a078d5a9bedabf6e378a848070fef7db0e19c589b4333e4852430.png" />
+<img alt="_images/47c31ec9e6aa8c41898ab22c2fffc9ca76198526c9738b9a80c2a29ae58441f6.png" src="_images/47c31ec9e6aa8c41898ab22c2fffc9ca76198526c9738b9a80c2a29ae58441f6.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -729,7 +733,7 @@ SVC (sigmoid)     828.8     0.807      0.122   0.711     0.209 0.760
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3b87b567a52e77131f57a7fd1343d48d030343397bf3e8b8f60f6b73c4a71a35.png" src="_images/3b87b567a52e77131f57a7fd1343d48d030343397bf3e8b8f60f6b73c4a71a35.png" />
+<img alt="_images/fe1f9398f67de6af1eb1855b5f5fc691f5a95cfcb5340b603be9e39abbde0f65.png" src="_images/fe1f9398f67de6af1eb1855b5f5fc691f5a95cfcb5340b603be9e39abbde0f65.png" />
 </div>
 </div>
 </section>
