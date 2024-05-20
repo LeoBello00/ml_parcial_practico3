@@ -386,6 +386,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#undersampling">Undersampling</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#oversampling">Oversampling</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-selection">Model selection</a></li>
 </ul>
             </nav>
         </div>
@@ -670,6 +671,7 @@ SVC (sigmoid)     310.0     0.735      0.093   0.725     0.164 0.730
 </div>
 </div>
 </div>
+<p>With 10 iterations, we have almost the same results as the GridSearchCV. However, the training with Bayes optmization is different than the GridSearchCV. For exemple, it’s almost 20 times faster for Radom Forest and twice faster for SVC. We can notice a small difference in the results, but it’s not significant.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -693,6 +695,7 @@ SVC (sigmoid)     310.0     0.735      0.093   0.725     0.164 0.730
 <img alt="_images/5bfd91dc51c0532201bdb51c19f0acadf3e64854b704e6d351a20b8c49586383.png" src="_images/5bfd91dc51c0532201bdb51c19f0acadf3e64854b704e6d351a20b8c49586383.png" />
 </div>
 </div>
+<p>Even though we have a good AUC score, the confusion matrix shows that we don’t avoid false positives (non-fraudulent transactions classified as fraudulent). This is a problem because it can lead to the blocking of legitimate transactions. However we can see that the number of false negatives (fraudulent transactions classified as non-fraudulent) is very low. This is a good point because it means that we don’t miss many fraudulent transactions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -715,6 +718,7 @@ SVC (sigmoid)     310.0     0.735      0.093   0.725     0.164 0.730
 <img alt="_images/47c31ec9e6aa8c41898ab22c2fffc9ca76198526c9738b9a80c2a29ae58441f6.png" src="_images/47c31ec9e6aa8c41898ab22c2fffc9ca76198526c9738b9a80c2a29ae58441f6.png" />
 </div>
 </div>
+<p>This figure shows the ROC curve of the different models. The closer the curve is to the top left corner, the better the model is. The Random Forest model is the best model in this case.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -736,6 +740,11 @@ SVC (sigmoid)     310.0     0.735      0.093   0.725     0.164 0.730
 <img alt="_images/fe1f9398f67de6af1eb1855b5f5fc691f5a95cfcb5340b603be9e39abbde0f65.png" src="_images/fe1f9398f67de6af1eb1855b5f5fc691f5a95cfcb5340b603be9e39abbde0f65.png" />
 </div>
 </div>
+<p>As we can see with the feature importances, the most important feature is ‘id_04’ and ‘id_01’ by far which is the same as the previous notebook. The other features can be a bit different but the most important ones are still the same.</p>
+</section>
+<section id="model-selection">
+<h2>Model selection<a class="headerlink" href="#model-selection" title="Link to this heading">#</a></h2>
+<p>After these analysis, we can be sure that the Random Forest model is the best model for this dataset. It has the best AUC and it is also the fastest model to train. Moreover which have significant speed up compared to GridSearch so to find the best hyperparameters, we prefere to use BayesSearchCV.</p>
 </section>
 </section>
 
@@ -806,6 +815,7 @@ SVC (sigmoid)     310.0     0.735      0.093   0.725     0.164 0.730
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#undersampling">Undersampling</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#oversampling">Oversampling</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-selection">Model selection</a></li>
 </ul>
   </nav></div>
 

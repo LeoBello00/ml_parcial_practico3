@@ -401,6 +401,19 @@ document.write(`
 <h1>Exercise 4 (Training without Bayes Optimization)<a class="headerlink" href="#exercise-4-training-without-bayes-optimization" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearnex</span> <span class="kn">import</span> <span class="n">patch_sklearn</span>
+<span class="n">patch_sklearn</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Intel(R) Extension for Scikit-learn* enabled (https://github.com/intel/scikit-learn-intelex)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <span class="kn">import</span> <span class="nn">warnings</span>
@@ -702,114 +715,119 @@ document.write(`
 <span class="k">else</span><span class="p">:</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path_tuning</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">results_dict</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">models_dict</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best params for </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: &quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">numDays</span> <span class="ow">in</span> <span class="n">models_dict</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s1">&#39;n_days&#39;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">numDays</span><span class="si">}</span><span class="s2"> days =&gt; </span><span class="si">{</span><span class="n">results_dict</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">numDays</span><span class="p">][</span><span class="s1">&#39;model&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tuning SVR...
-1 days =&gt; 1.4s =&gt; {&#39;model__C&#39;: 1, &#39;model__epsilon&#39;: 0.1, &#39;scaler&#39;: MinMaxScaler()}
-3 days =&gt; 0.4s =&gt; {&#39;model__C&#39;: 1, &#39;model__epsilon&#39;: 0.001, &#39;scaler&#39;: MinMaxScaler()}
-7 days =&gt; 0.8s =&gt; {&#39;model__C&#39;: 1, &#39;model__epsilon&#39;: 0.001, &#39;scaler&#39;: MinMaxScaler()}
-14 days =&gt; 2.7s =&gt; {&#39;model__C&#39;: 1, &#39;model__epsilon&#39;: 0.01, &#39;scaler&#39;: MinMaxScaler()}
-21 days =&gt; 4.4s =&gt; {&#39;model__C&#39;: 1, &#39;model__epsilon&#39;: 0.01, &#39;scaler&#39;: MinMaxScaler()}
-30 days =&gt; 7.3s =&gt; {&#39;model__C&#39;: 1, &#39;model__epsilon&#39;: 0.1, &#39;scaler&#39;: StandardScaler()}
-60 days =&gt; 18.6s =&gt; {&#39;model__C&#39;: 1, &#39;model__epsilon&#39;: 0.01, &#39;scaler&#39;: MinMaxScaler()}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best params for SVR: 
+1 days =&gt; SVR(C=1)
+3 days =&gt; SVR(C=1, epsilon=0.001)
+7 days =&gt; SVR(C=1, epsilon=0.001)
+14 days =&gt; SVR(C=1, epsilon=0.01)
+21 days =&gt; SVR(C=1, epsilon=0.01)
+30 days =&gt; SVR(C=1)
+60 days =&gt; SVR(C=1, epsilon=0.01)
 
-Tuning Linear Regression...
-1 days =&gt; 0.0s =&gt; {&#39;scaler&#39;: None}
-3 days =&gt; 0.0s =&gt; {&#39;scaler&#39;: None}
-7 days =&gt; 0.0s =&gt; {&#39;scaler&#39;: None}
-14 days =&gt; 0.0s =&gt; {&#39;scaler&#39;: StandardScaler()}
-21 days =&gt; 0.0s =&gt; {&#39;scaler&#39;: MinMaxScaler()}
-30 days =&gt; 0.1s =&gt; {&#39;scaler&#39;: MinMaxScaler()}
-60 days =&gt; 0.1s =&gt; {&#39;scaler&#39;: MinMaxScaler()}
-90 days =&gt; 0.1s =&gt; {&#39;scaler&#39;: None}
-180 days =&gt; 0.1s =&gt; {&#39;scaler&#39;: None}
-365 days =&gt; 0.1s =&gt; {&#39;scaler&#39;: MinMaxScaler()}
+Best params for Linear Regression: 
+1 days =&gt; LinearRegression()
+3 days =&gt; LinearRegression()
+7 days =&gt; LinearRegression()
+14 days =&gt; LinearRegression()
+21 days =&gt; LinearRegression()
+30 days =&gt; LinearRegression()
+60 days =&gt; LinearRegression()
+90 days =&gt; LinearRegression()
+180 days =&gt; LinearRegression()
+365 days =&gt; LinearRegression()
 
-Tuning Bayesian Ridge...
-1 days =&gt; 1.8s =&gt; {&#39;model__alpha_1&#39;: 0.001, &#39;model__alpha_2&#39;: 1e-06, &#39;model__lambda_1&#39;: 1e-06, &#39;model__lambda_2&#39;: 0.001, &#39;scaler&#39;: StandardScaler()}
-3 days =&gt; 1.7s =&gt; {&#39;model__alpha_1&#39;: 1e-06, &#39;model__alpha_2&#39;: 0.001, &#39;model__lambda_1&#39;: 0.001, &#39;model__lambda_2&#39;: 1e-06, &#39;scaler&#39;: None}
-7 days =&gt; 1.7s =&gt; {&#39;model__alpha_1&#39;: 1e-06, &#39;model__alpha_2&#39;: 0.001, &#39;model__lambda_1&#39;: 0.001, &#39;model__lambda_2&#39;: 1e-06, &#39;scaler&#39;: StandardScaler()}
-14 days =&gt; 1.8s =&gt; {&#39;model__alpha_1&#39;: 1e-06, &#39;model__alpha_2&#39;: 0.001, &#39;model__lambda_1&#39;: 0.001, &#39;model__lambda_2&#39;: 1e-06, &#39;scaler&#39;: StandardScaler()}
-21 days =&gt; 1.7s =&gt; {&#39;model__alpha_1&#39;: 0.001, &#39;model__alpha_2&#39;: 1e-06, &#39;model__lambda_1&#39;: 1e-06, &#39;model__lambda_2&#39;: 0.001, &#39;scaler&#39;: StandardScaler()}
-30 days =&gt; 1.8s =&gt; {&#39;model__alpha_1&#39;: 0.001, &#39;model__alpha_2&#39;: 1e-06, &#39;model__lambda_1&#39;: 1e-06, &#39;model__lambda_2&#39;: 0.001, &#39;scaler&#39;: StandardScaler()}
-60 days =&gt; 1.8s =&gt; {&#39;model__alpha_1&#39;: 0.001, &#39;model__alpha_2&#39;: 1e-06, &#39;model__lambda_1&#39;: 1e-06, &#39;model__lambda_2&#39;: 0.001, &#39;scaler&#39;: StandardScaler()}
-90 days =&gt; 1.9s =&gt; {&#39;model__alpha_1&#39;: 1e-06, &#39;model__alpha_2&#39;: 0.001, &#39;model__lambda_1&#39;: 1e-06, &#39;model__lambda_2&#39;: 0.001, &#39;scaler&#39;: None}
-180 days =&gt; 2.1s =&gt; {&#39;model__alpha_1&#39;: 1e-06, &#39;model__alpha_2&#39;: 0.001, &#39;model__lambda_1&#39;: 0.001, &#39;model__lambda_2&#39;: 1e-06, &#39;scaler&#39;: MinMaxScaler()}
-365 days =&gt; 2.6s =&gt; {&#39;model__alpha_1&#39;: 1e-06, &#39;model__alpha_2&#39;: 0.001, &#39;model__lambda_1&#39;: 0.001, &#39;model__lambda_2&#39;: 1e-06, &#39;scaler&#39;: StandardScaler()}
+Best params for Bayesian Ridge: 
+1 days =&gt; BayesianRidge(alpha_1=0.001, lambda_2=0.001)
+3 days =&gt; BayesianRidge(alpha_2=0.001, lambda_1=0.001)
+7 days =&gt; BayesianRidge(alpha_2=0.001, lambda_1=0.001)
+14 days =&gt; BayesianRidge(alpha_2=0.001, lambda_1=0.001)
+21 days =&gt; BayesianRidge(alpha_1=0.001, lambda_2=0.001)
+30 days =&gt; BayesianRidge(alpha_1=0.001, lambda_2=0.001)
+60 days =&gt; BayesianRidge(alpha_1=0.001, lambda_2=0.001)
+90 days =&gt; BayesianRidge(alpha_2=0.001, lambda_2=0.001)
+180 days =&gt; BayesianRidge(alpha_2=0.001, lambda_1=0.001)
+365 days =&gt; BayesianRidge(alpha_2=0.001, lambda_1=0.001)
 
-Tuning Decision Tree...
-1 days =&gt; 0.2s =&gt; {&#39;model__max_depth&#39;: 3, &#39;scaler&#39;: None}
-3 days =&gt; 0.2s =&gt; {&#39;model__max_depth&#39;: 2, &#39;scaler&#39;: None}
-7 days =&gt; 0.2s =&gt; {&#39;model__max_depth&#39;: 3, &#39;scaler&#39;: None}
-14 days =&gt; 0.2s =&gt; {&#39;model__max_depth&#39;: 4, &#39;scaler&#39;: None}
-21 days =&gt; 0.2s =&gt; {&#39;model__max_depth&#39;: 3, &#39;scaler&#39;: None}
-30 days =&gt; 0.3s =&gt; {&#39;model__max_depth&#39;: 4, &#39;scaler&#39;: None}
-60 days =&gt; 0.2s =&gt; {&#39;model__max_depth&#39;: 4, &#39;scaler&#39;: None}
-90 days =&gt; 0.3s =&gt; {&#39;model__max_depth&#39;: 6, &#39;scaler&#39;: None}
-180 days =&gt; 0.3s =&gt; {&#39;model__max_depth&#39;: 6, &#39;scaler&#39;: None}
-365 days =&gt; 0.6s =&gt; {&#39;model__max_depth&#39;: 6, &#39;scaler&#39;: None}
+Best params for Decision Tree: 
+1 days =&gt; DecisionTreeRegressor(max_depth=3, random_state=42)
+3 days =&gt; DecisionTreeRegressor(max_depth=2, random_state=42)
+7 days =&gt; DecisionTreeRegressor(max_depth=3, random_state=42)
+14 days =&gt; DecisionTreeRegressor(max_depth=4, random_state=42)
+21 days =&gt; DecisionTreeRegressor(max_depth=3, random_state=42)
+30 days =&gt; DecisionTreeRegressor(max_depth=4, random_state=42)
+60 days =&gt; DecisionTreeRegressor(max_depth=4, random_state=42)
+90 days =&gt; DecisionTreeRegressor(max_depth=6, random_state=42)
+180 days =&gt; DecisionTreeRegressor(max_depth=6, random_state=42)
+365 days =&gt; DecisionTreeRegressor(max_depth=6, random_state=42)
 
-Tuning Random Forest...
-1 days =&gt; 6.0s =&gt; {&#39;model__max_depth&#39;: 5, &#39;model__n_estimators&#39;: 200, &#39;scaler&#39;: None}
-3 days =&gt; 6.7s =&gt; {&#39;model__max_depth&#39;: 4, &#39;model__n_estimators&#39;: 200, &#39;scaler&#39;: None}
-7 days =&gt; 7.7s =&gt; {&#39;model__max_depth&#39;: 13, &#39;model__n_estimators&#39;: 50, &#39;scaler&#39;: None}
-14 days =&gt; 9.6s =&gt; {&#39;model__max_depth&#39;: 11, &#39;model__n_estimators&#39;: 50, &#39;scaler&#39;: None}
-21 days =&gt; 11.5s =&gt; {&#39;model__max_depth&#39;: 3, &#39;model__n_estimators&#39;: 200, &#39;scaler&#39;: None}
-30 days =&gt; 13.8s =&gt; {&#39;model__max_depth&#39;: 4, &#39;model__n_estimators&#39;: 10, &#39;scaler&#39;: None}
-60 days =&gt; 22.5s =&gt; {&#39;model__max_depth&#39;: 7, &#39;model__n_estimators&#39;: 200, &#39;scaler&#39;: None}
-90 days =&gt; 30.9s =&gt; {&#39;model__max_depth&#39;: 6, &#39;model__n_estimators&#39;: 10, &#39;scaler&#39;: None}
-180 days =&gt; 57.6s =&gt; {&#39;model__max_depth&#39;: 7, &#39;model__n_estimators&#39;: 200, &#39;scaler&#39;: None}
-365 days =&gt; 113.9s =&gt; {&#39;model__max_depth&#39;: 7, &#39;model__n_estimators&#39;: 200, &#39;scaler&#39;: None}
+Best params for Random Forest: 
+1 days =&gt; RandomForestRegressor(max_depth=5, n_estimators=200, random_state=42)
+3 days =&gt; RandomForestRegressor(max_depth=4, n_estimators=200, random_state=42)
+7 days =&gt; RandomForestRegressor(max_depth=13, n_estimators=50, random_state=42)
+14 days =&gt; RandomForestRegressor(max_depth=11, n_estimators=50, random_state=42)
+21 days =&gt; RandomForestRegressor(max_depth=3, n_estimators=200, random_state=42)
+30 days =&gt; RandomForestRegressor(max_depth=4, n_estimators=10, random_state=42)
+60 days =&gt; RandomForestRegressor(max_depth=7, n_estimators=200, random_state=42)
+90 days =&gt; RandomForestRegressor(max_depth=6, n_estimators=10, random_state=42)
+180 days =&gt; RandomForestRegressor(max_depth=7, n_estimators=200, random_state=42)
+365 days =&gt; RandomForestRegressor(max_depth=7, n_estimators=200, random_state=42)
 
-Tuning Gradient Boosting...
-1 days =&gt; 0.6s =&gt; {&#39;model__max_depth&#39;: 2, &#39;model__n_estimators&#39;: 50, &#39;scaler&#39;: None}
-3 days =&gt; 0.6s =&gt; {&#39;model__max_depth&#39;: 1, &#39;model__n_estimators&#39;: 50, &#39;scaler&#39;: None}
-7 days =&gt; 0.8s =&gt; {&#39;model__max_depth&#39;: 1, &#39;model__n_estimators&#39;: 100, &#39;scaler&#39;: None}
-14 days =&gt; 1.0s =&gt; {&#39;model__max_depth&#39;: 2, &#39;model__n_estimators&#39;: 30, &#39;scaler&#39;: None}
-21 days =&gt; 1.3s =&gt; {&#39;model__max_depth&#39;: 2, &#39;model__n_estimators&#39;: 50, &#39;scaler&#39;: None}
-30 days =&gt; 1.4s =&gt; {&#39;model__max_depth&#39;: 2, &#39;model__n_estimators&#39;: 100, &#39;scaler&#39;: None}
-60 days =&gt; 2.0s =&gt; {&#39;model__max_depth&#39;: 2, &#39;model__n_estimators&#39;: 100, &#39;scaler&#39;: None}
-90 days =&gt; 2.8s =&gt; {&#39;model__max_depth&#39;: 2, &#39;model__n_estimators&#39;: 200, &#39;scaler&#39;: None}
-180 days =&gt; 4.5s =&gt; {&#39;model__max_depth&#39;: 2, &#39;model__n_estimators&#39;: 200, &#39;scaler&#39;: None}
-365 days =&gt; 7.1s =&gt; {&#39;model__max_depth&#39;: 4, &#39;model__n_estimators&#39;: 50, &#39;scaler&#39;: None}
+Best params for Gradient Boosting: 
+1 days =&gt; GradientBoostingRegressor(max_depth=2, n_estimators=50, random_state=42)
+3 days =&gt; GradientBoostingRegressor(max_depth=1, n_estimators=50, random_state=42)
+7 days =&gt; GradientBoostingRegressor(max_depth=1, random_state=42)
+14 days =&gt; GradientBoostingRegressor(max_depth=2, n_estimators=30, random_state=42)
+21 days =&gt; GradientBoostingRegressor(max_depth=2, n_estimators=50, random_state=42)
+30 days =&gt; GradientBoostingRegressor(max_depth=2, random_state=42)
+60 days =&gt; GradientBoostingRegressor(max_depth=2, random_state=42)
+90 days =&gt; GradientBoostingRegressor(max_depth=2, n_estimators=200, random_state=42)
+180 days =&gt; GradientBoostingRegressor(max_depth=2, n_estimators=200, random_state=42)
+365 days =&gt; GradientBoostingRegressor(max_depth=4, n_estimators=50, random_state=42)
 
-Tuning K-NN...
-1 days =&gt; 0.3s =&gt; {&#39;model__n_neighbors&#39;: 1, &#39;scaler&#39;: None}
-3 days =&gt; 0.5s =&gt; {&#39;model__n_neighbors&#39;: 7, &#39;scaler&#39;: StandardScaler()}
-7 days =&gt; 0.4s =&gt; {&#39;model__n_neighbors&#39;: 5, &#39;scaler&#39;: StandardScaler()}
-14 days =&gt; 0.4s =&gt; {&#39;model__n_neighbors&#39;: 6, &#39;scaler&#39;: None}
-21 days =&gt; 0.4s =&gt; {&#39;model__n_neighbors&#39;: 7, &#39;scaler&#39;: None}
-30 days =&gt; 0.4s =&gt; {&#39;model__n_neighbors&#39;: 7, &#39;scaler&#39;: None}
-60 days =&gt; 0.5s =&gt; {&#39;model__n_neighbors&#39;: 15, &#39;scaler&#39;: None}
-90 days =&gt; 0.5s =&gt; {&#39;model__n_neighbors&#39;: 17, &#39;scaler&#39;: None}
-180 days =&gt; 0.7s =&gt; {&#39;model__n_neighbors&#39;: 18, &#39;scaler&#39;: None}
-365 days =&gt; 1.2s =&gt; {&#39;model__n_neighbors&#39;: 19, &#39;scaler&#39;: None}
+Best params for K-NN: 
+1 days =&gt; KNeighborsRegressor(n_jobs=-1, n_neighbors=1)
+3 days =&gt; KNeighborsRegressor(n_jobs=-1, n_neighbors=7)
+7 days =&gt; KNeighborsRegressor(n_jobs=-1)
+14 days =&gt; KNeighborsRegressor(n_jobs=-1, n_neighbors=6)
+21 days =&gt; KNeighborsRegressor(n_jobs=-1, n_neighbors=7)
+30 days =&gt; KNeighborsRegressor(n_jobs=-1, n_neighbors=7)
+60 days =&gt; KNeighborsRegressor(n_jobs=-1, n_neighbors=15)
+90 days =&gt; KNeighborsRegressor(n_jobs=-1, n_neighbors=17)
+180 days =&gt; KNeighborsRegressor(n_jobs=-1, n_neighbors=18)
+365 days =&gt; KNeighborsRegressor(n_jobs=-1, n_neighbors=19)
 
-Tuning Ridge...
-1 days =&gt; 0.1s =&gt; {&#39;model__alpha&#39;: 1, &#39;scaler&#39;: StandardScaler()}
-3 days =&gt; 0.1s =&gt; {&#39;model__alpha&#39;: 10, &#39;scaler&#39;: None}
-7 days =&gt; 0.1s =&gt; {&#39;model__alpha&#39;: 1, &#39;scaler&#39;: None}
-14 days =&gt; 0.1s =&gt; {&#39;model__alpha&#39;: 10, &#39;scaler&#39;: StandardScaler()}
-21 days =&gt; 0.2s =&gt; {&#39;model__alpha&#39;: 1, &#39;scaler&#39;: None}
-30 days =&gt; 0.1s =&gt; {&#39;model__alpha&#39;: 0.001, &#39;scaler&#39;: StandardScaler()}
-60 days =&gt; 0.1s =&gt; {&#39;model__alpha&#39;: 0.001, &#39;scaler&#39;: StandardScaler()}
-90 days =&gt; 0.2s =&gt; {&#39;model__alpha&#39;: 1, &#39;scaler&#39;: None}
-180 days =&gt; 0.1s =&gt; {&#39;model__alpha&#39;: 0.001, &#39;scaler&#39;: None}
-365 days =&gt; 0.2s =&gt; {&#39;model__alpha&#39;: 0.001, &#39;scaler&#39;: None}
+Best params for Ridge: 
+1 days =&gt; Ridge(alpha=1, random_state=42)
+3 days =&gt; Ridge(alpha=10, random_state=42)
+7 days =&gt; Ridge(alpha=1, random_state=42)
+14 days =&gt; Ridge(alpha=10, random_state=42)
+21 days =&gt; Ridge(alpha=1, random_state=42)
+30 days =&gt; Ridge(alpha=0.001, random_state=42)
+60 days =&gt; Ridge(alpha=0.001, random_state=42)
+90 days =&gt; Ridge(alpha=1, random_state=42)
+180 days =&gt; Ridge(alpha=0.001, random_state=42)
+365 days =&gt; Ridge(alpha=0.001, random_state=42)
 
-Tuning Lasso...
-1 days =&gt; 0.2s =&gt; {&#39;model__alpha&#39;: 0.001, &#39;scaler&#39;: None}
-3 days =&gt; 0.1s =&gt; {&#39;model__alpha&#39;: 0.1, &#39;scaler&#39;: StandardScaler()}
-7 days =&gt; 0.1s =&gt; {&#39;model__alpha&#39;: 0.001, &#39;scaler&#39;: None}
-14 days =&gt; 0.1s =&gt; {&#39;model__alpha&#39;: 0.01, &#39;scaler&#39;: MinMaxScaler()}
-21 days =&gt; 0.2s =&gt; {&#39;model__alpha&#39;: 0.01, &#39;scaler&#39;: StandardScaler()}
-30 days =&gt; 0.2s =&gt; {&#39;model__alpha&#39;: 0.001, &#39;scaler&#39;: StandardScaler()}
-60 days =&gt; 0.2s =&gt; {&#39;model__alpha&#39;: 0.001, &#39;scaler&#39;: StandardScaler()}
-90 days =&gt; 0.2s =&gt; {&#39;model__alpha&#39;: 0.001, &#39;scaler&#39;: None}
-180 days =&gt; 0.2s =&gt; {&#39;model__alpha&#39;: 0.01, &#39;scaler&#39;: StandardScaler()}
-365 days =&gt; 0.2s =&gt; {&#39;model__alpha&#39;: 0.001, &#39;scaler&#39;: StandardScaler()}
+Best params for Lasso: 
+1 days =&gt; Lasso(alpha=0.001, random_state=42)
+3 days =&gt; Lasso(alpha=0.1, random_state=42)
+7 days =&gt; Lasso(alpha=0.001, random_state=42)
+14 days =&gt; Lasso(alpha=0.01, random_state=42)
+21 days =&gt; Lasso(alpha=0.01, random_state=42)
+30 days =&gt; Lasso(alpha=0.001, random_state=42)
+60 days =&gt; Lasso(alpha=0.001, random_state=42)
+90 days =&gt; Lasso(alpha=0.001, random_state=42)
+180 days =&gt; Lasso(alpha=0.01, random_state=42)
+365 days =&gt; Lasso(alpha=0.001, random_state=42)
 </pre></div>
 </div>
 </div>
@@ -870,114 +888,6 @@ Tuning Lasso...
 <span class="k">else</span><span class="p">:</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path_results</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">results_dict</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training SVR...
-1 days =&gt; 11.0s
-3 days =&gt; 11.7s
-7 days =&gt; 14.9s
-14 days =&gt; 24.7s
-21 days =&gt; 40.2s
-30 days =&gt; 65.8s
-60 days =&gt; 207.0s
-
-Training Linear Regression...
-1 days =&gt; 7.7s
-3 days =&gt; 7.7s
-7 days =&gt; 7.8s
-14 days =&gt; 10.7s
-21 days =&gt; 10.5s
-30 days =&gt; 10.5s
-60 days =&gt; 10.6s
-90 days =&gt; 8.0s
-180 days =&gt; 8.4s
-365 days =&gt; 11.3s
-
-Training Bayesian Ridge...
-1 days =&gt; 11.7s
-3 days =&gt; 8.9s
-7 days =&gt; 11.4s
-14 days =&gt; 12.4s
-21 days =&gt; 12.5s
-30 days =&gt; 11.7s
-60 days =&gt; 11.8s
-90 days =&gt; 8.8s
-180 days =&gt; 11.9s
-365 days =&gt; 12.1s
-
-Training Decision Tree...
-1 days =&gt; 8.0s
-3 days =&gt; 8.2s
-7 days =&gt; 8.6s
-14 days =&gt; 9.1s
-21 days =&gt; 10.4s
-30 days =&gt; 10.1s
-60 days =&gt; 12.1s
-90 days =&gt; 15.9s
-180 days =&gt; 22.3s
-365 days =&gt; 34.4s
-
-Training Random Forest...
-1 days =&gt; 357.8s
-3 days =&gt; 388.6s
-7 days =&gt; 141.8s
-14 days =&gt; 188.5s
-21 days =&gt; 499.4s
-30 days =&gt; 41.9s
-60 days =&gt; 1222.0s
-90 days =&gt; 82.8s
-180 days =&gt; 2612.1s
-365 days =&gt; 4452.7s
-
-Training Gradient Boosting...
-1 days =&gt; 50.3s
-3 days =&gt; 51.0s
-7 days =&gt; 101.9s
-14 days =&gt; 49.1s
-21 days =&gt; 85.5s
-30 days =&gt; 185.1s
-60 days =&gt; 263.1s
-90 days =&gt; 673.1s
-180 days =&gt; 1127.6s
-365 days =&gt; 918.0s
-
-Training K-NN...
-1 days =&gt; 78.1s
-3 days =&gt; 77.6s
-7 days =&gt; 78.0s
-14 days =&gt; 73.2s
-21 days =&gt; 73.5s
-30 days =&gt; 73.5s
-60 days =&gt; 74.0s
-90 days =&gt; 75.1s
-180 days =&gt; 77.0s
-365 days =&gt; 76.8s
-
-Training Ridge...
-1 days =&gt; 10.2s
-3 days =&gt; 7.5s
-7 days =&gt; 7.5s
-14 days =&gt; 10.3s
-21 days =&gt; 7.6s
-30 days =&gt; 10.3s
-60 days =&gt; 10.4s
-90 days =&gt; 7.6s
-180 days =&gt; 7.6s
-365 days =&gt; 7.4s
-
-Training Lasso...
-1 days =&gt; 8.4s
-3 days =&gt; 11.6s
-7 days =&gt; 8.7s
-14 days =&gt; 11.2s
-21 days =&gt; 11.4s
-30 days =&gt; 11.4s
-60 days =&gt; 11.5s
-90 days =&gt; 14.1s
-180 days =&gt; 18.7s
-365 days =&gt; 19.2s
 </pre></div>
 </div>
 </div>
@@ -1106,6 +1016,41 @@ Linear Regression (180 days)       8.4 2.810000e-01 0.720 0.615
 </div>
 </div>
 </div>
+<p>We can see that Gradient Boosting and Random Forest are the best models for this dataset with the highest R2 and lowest RMSE. However, the CPU time for these models is significantly higher than the other models or with less days. For a real-time application, we should consider using a simpler model like Ridge Regression who has a good R2 and RMSE with a lower CPU time.</p>
+<p>We can also notice that the performance of the models is better when we use more days to predict the wind speed. On the one hand this not expected because the wind speed is a chaotic system very dependant on the last values. On the other hand, the models have more data to learn from and can make better predictions.</p>
+<p>That’s why it would be interesting to test the models with all the dataset without taking into account the days to see if the models can learn from the data.</p>
+<p>Moreover, we have seen that almost every predictors have a high autocorrelation with the same hour of the previous days. We could use this information to predict the wind speed and train only with the same hours. This would be a very interesting approach to test.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">results_overall</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results_overall</span><span class="p">[</span><span class="s1">&#39;Model&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;(&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">results_overall</span><span class="p">[</span><span class="s1">&#39;Days&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results_overall</span><span class="p">[</span><span class="s1">&#39;Model&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;(&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">results_overall</span><span class="p">[[</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Days&#39;</span><span class="p">,</span> <span class="s1">&#39;R2&#39;</span><span class="p">]]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">results_overall</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">results_overall</span><span class="p">[</span><span class="n">results_overall</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span><span class="p">][</span><span class="s1">&#39;Days&#39;</span><span class="p">],</span>
+        <span class="n">results_overall</span><span class="p">[</span><span class="n">results_overall</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span><span class="p">][</span><span class="s1">&#39;R2&#39;</span><span class="p">],</span>
+        <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of days&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;R2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;R2 depending on the number of days&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f86a3ea90a85084b7de22a982e070522bcfb8e6b2b2bc78c1ea77a0d5d01f13c.png" src="_images/f86a3ea90a85084b7de22a982e070522bcfb8e6b2b2bc78c1ea77a0d5d01f13c.png" />
+</div>
+</div>
+<p>This graph confirms that we have better results when we use more days to predict the wind speed.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -1164,7 +1109,7 @@ Linear Regression (180 days)       8.4 2.810000e-01 0.720 0.615
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/814e2763a166ee5b2bcfcbaa84c52ab13d3ae50ead27ce21711975ba6c8a41e5.png" src="_images/814e2763a166ee5b2bcfcbaa84c52ab13d3ae50ead27ce21711975ba6c8a41e5.png" />
+<img alt="_images/2da8d0e531e4a1fdad30ff1e35cbb0192e6c07abebe62550ad96fe8fb1b32ef7.png" src="_images/2da8d0e531e4a1fdad30ff1e35cbb0192e6c07abebe62550ad96fe8fb1b32ef7.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1291,33 +1236,38 @@ Linear Regression (180 days) -0.01 0.62      0.0
 </div>
 </div>
 </div>
+<p>Here, we can notice that all the models have a p-value very close to 0 which means we can affirm with a very high confidence that the residuals are normally distributed which is a good sign beacause it means that the model is well fitted.</p>
+<p>Once more we can affirm that the best models are Gradient Boosting and Random Forest because their residuals have the lowest standard deviation and a mean very close to 0.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_model</span> <span class="o">=</span> <span class="s1">&#39;Random Forest&#39;</span>
-<span class="n">best_nb_days</span> <span class="o">=</span> <span class="mi">365</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span> <span class="k">as</span> <span class="nn">rd</span>
+<span class="n">rd</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 
-<span class="n">y_test</span> <span class="o">=</span> <span class="n">results_dict</span><span class="p">[</span><span class="n">best_model</span><span class="p">][</span><span class="n">best_nb_days</span><span class="p">][</span><span class="s1">&#39;test&#39;</span><span class="p">]</span>
-<span class="n">y_pred</span> <span class="o">=</span> <span class="n">results_dict</span><span class="p">[</span><span class="n">best_model</span><span class="p">][</span><span class="n">best_nb_days</span><span class="p">][</span><span class="s1">&#39;pred&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">plotly</span> <span class="kn">import</span> <span class="n">graph_objs</span> <span class="k">as</span> <span class="n">go</span>
-<span class="n">plot</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+<span class="n">y_test_RF_365</span> <span class="o">=</span> <span class="n">results_dict</span><span class="p">[</span><span class="s1">&#39;Random Forest&#39;</span><span class="p">][</span><span class="mi">365</span><span class="p">][</span><span class="s1">&#39;test&#39;</span><span class="p">]</span>
+<span class="n">y_pred_RF_365</span> <span class="o">=</span> <span class="n">results_dict</span><span class="p">[</span><span class="s1">&#39;Random Forest&#39;</span><span class="p">][</span><span class="mi">365</span><span class="p">][</span><span class="s1">&#39;pred&#39;</span><span class="p">]</span>
 
+<span class="n">y_test_GB_365</span> <span class="o">=</span> <span class="n">results_dict</span><span class="p">[</span><span class="s1">&#39;Gradient Boosting&#39;</span><span class="p">][</span><span class="mi">365</span><span class="p">][</span><span class="s1">&#39;test&#39;</span><span class="p">]</span>
+<span class="n">y_pred_GB_365</span> <span class="o">=</span> <span class="n">results_dict</span><span class="p">[</span><span class="s1">&#39;Gradient Boosting&#39;</span><span class="p">][</span><span class="mi">365</span><span class="p">][</span><span class="s1">&#39;pred&#39;</span><span class="p">]</span>
 
-<span class="n">plot</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span> <span class="n">dfWind</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">y_test</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;True&#39;</span><span class="p">))</span>
-<span class="n">plot</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span> <span class="n">dfWind</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Predicted&#39;</span><span class="p">))</span>
-<span class="n">plot</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">best_model</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">best_nb_days</span><span class="si">}</span><span class="s1"> days)&#39;</span><span class="p">,</span> <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">yaxis_title</span><span class="o">=</span><span class="s1">&#39;Wind speed (m/s)&#39;</span><span class="p">)</span>
-<span class="n">plot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">idx_rd</span> <span class="o">=</span> <span class="n">rd</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_test_RF_365</span><span class="p">)</span> <span class="o">-</span> <span class="mi">24</span><span class="o">*</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_test_RF_365</span><span class="p">[</span><span class="n">idx_rd</span><span class="p">:</span><span class="n">idx_rd</span> <span class="o">+</span> <span class="mi">24</span><span class="o">*</span><span class="mi">7</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True values&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_pred_RF_365</span><span class="p">[</span><span class="n">idx_rd</span><span class="p">:</span><span class="n">idx_rd</span> <span class="o">+</span> <span class="mi">24</span><span class="o">*</span><span class="mi">7</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Random Forest (365 days)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_pred_GB_365</span><span class="p">[</span><span class="n">idx_rd</span><span class="p">:</span><span class="n">idx_rd</span> <span class="o">+</span> <span class="mi">24</span><span class="o">*</span><span class="mi">7</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Gradient Boosting (365 days)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (hours)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Wind speed (m/s)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Wind speed prediction for 1 month&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
+<img alt="_images/2943ab97a4c871560c1a342f48443f4af08e60aa492eefea20a5ba2deafecbe3.png" src="_images/2943ab97a4c871560c1a342f48443f4af08e60aa492eefea20a5ba2deafecbe3.png" />
 </div>
 </div>
+<p>We can see that predictions follow quite well the true values even if the wind speed is quite volatile.</p>
 </section>
 </section>
 
